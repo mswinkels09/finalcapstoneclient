@@ -6,7 +6,6 @@ import { SoldItemList } from "./soldItems/SoldItemList";
 import { SoldItemProvider } from "./soldItems/SoldItemProvider";
 import { ExpenseList } from "./expenses/ExpenseList";
 import { ExpenseProvider } from "./expenses/ExpenseProvider";
-import Table from "./expenses/ExpenseTable";
 
 export const ApplicationViews = (props) => {
     return <>
@@ -27,7 +26,6 @@ export const ApplicationViews = (props) => {
         <ExpenseProvider>
             <Route exact path="/expenses">
                 <ExpenseList {...props} />
-                {/* <Table {...props} /> */}
             </Route>
         </ExpenseProvider>
     </>

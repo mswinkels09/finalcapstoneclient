@@ -1,47 +1,126 @@
-import React from "react";
-import { useTable } from "react-table";
+// import React, { useContext, useEffect, useState, useMemo } from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Paper from '@material-ui/core/Paper';
+// import Table from '@material-ui/core/Table';
+// import TableBody from '@material-ui/core/TableBody';
+// import TableCell from '@material-ui/core/TableCell';
+// import TableContainer from '@material-ui/core/TableContainer';
+// import TableHead from '@material-ui/core/TableHead';
+// import TablePagination from '@material-ui/core/TablePagination';
+// import TableRow from '@material-ui/core/TableRow';
+// import { ExpenseContext } from "./ExpenseProvider.js"
+
+// export const StickyHeadTable = (props) => {
+
+// const columns = [
+//     {
+//         id: 'date',
+//         label: 'Date Purchased',
+//         minWidth: 100,
+//         align: 'right',
+//         value: 'expenses.date_purchased',
+//         format: (value) => value.toLocaleString('en-US'),
+//     },
+//     {
+//         id: 'suppy_type',
+//         label: 'Supply Type',
+//         minWidth: 100,
+//         align: 'right',
+//     },
+//     {
+//         id: 'cost',
+//         label: 'Amount Spent',
+//         minWidth: 100,
+//         align: 'right',
+//         format: (value) => value.toFixed(2),
+//     },
+// ];
 
 
-export function Table({ columns, data }) {
-  // Use the useTable Hook to send the columns and data to build the table
-    const {
-    getTableProps, // table props from react-table
-    getTableBodyProps, // table body props from react-table
-    headerGroups, // headerGroups, if your table has groupings
-    rows, // rows for the table based on the data passed
-    prepareRow // Prepare the row (this function needs to be called for each row before getting the row props)
-    } = useTable({
-    columns,
-    data
-    });
+// function createData(id, date, supply_type, cost ) {
+//     const datePurchased = expenses.find(e => {
+//         return e.date_purchased
+//     })
+//     console.log(datePurchased)
+//     return {id, datePurchased, supply_type, cost };
+// }
 
-/* 
-    Render the UI for your table
-    - react-table doesn't have UI, it's headless. We just need to put the react-table props from the Hooks, and it will do its magic automatically
-  */
-    return (
-    <table {...getTableProps()}>
-        <thead>
-            <tr>
-            {columns.map(column => (
-                column.columns.map(c => (
-                    <th>{c.Header}</th>
-                ))
-                ))}
-            </tr>
-        </thead>
-        <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-            <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                })}
-            </tr>
-            );
-            })}
-        </tbody>
-    </table>
-    )
-}
+// const { expenses, getExpenses } = useContext(ExpenseContext)
+
+// useEffect(() => {
+//     getExpenses()
+// }, [])
+
+// const rows = [ createData(expenses.id)
+// ];
+
+// // console.log(rows)
+// const useStyles = makeStyles({
+//     root: {
+//         width: '100%',
+//     },
+//     container: {
+//         maxHeight: 440,
+//     },
+// });
+
+//     const classes = useStyles();
+//     const [page, setPage] = React.useState(0);
+//     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+//     const handleChangePage = (event, newPage) => {
+//         setPage(newPage);
+//     };
+
+//     const handleChangeRowsPerPage = (event) => {
+//         setRowsPerPage(+event.target.value);
+//         setPage(0);
+//     };
+
+//     return (
+//         <Paper className={classes.root}>
+//             <TableContainer className={classes.container}>
+//                 <Table stickyHeader aria-label="sticky table">
+//                     <TableHead>
+//                         <TableRow>
+//                             {columns.map((column) => (
+//                                 <TableCell
+//                                     key={column.id}
+//                                     align={column.align}
+//                                     style={{ minWidth: column.minWidth }}
+//                                 >
+//                                     {column.label}
+//                                 </TableCell>
+//                             ))}
+//                         </TableRow>
+//                     </TableHead>
+//                     <TableBody>
+//                         {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+//                             return (
+//                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+//                                     {columns.map((column) => {
+//                                         const value = row[column.id];
+//                                         return (
+//                                             <TableCell key={column.id} align={column.align}>
+//                                                 {column.format && typeof value === 'number' ? column.format(value) : value}
+//                                             </TableCell>
+//                                         );
+//                                     })}
+//                                 </TableRow>
+//                             );
+//                         })}
+//                     </TableBody>
+//                 </Table>
+//             </TableContainer>
+//             <TablePagination
+//                 rowsPerPageOptions={[10, 25, 100]}
+//                 component="div"
+//                 count={rows.length}
+//                 rowsPerPage={rowsPerPage}
+//                 page={page}
+//                 onChangePage={handleChangePage}
+//                 onChangeRowsPerPage={handleChangeRowsPerPage}
+//             />
+//         </Paper>
+//     );
+// }
