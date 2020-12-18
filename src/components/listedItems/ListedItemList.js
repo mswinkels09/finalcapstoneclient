@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { ListedItemContext } from "./ListedItemProvider.js"
+import { Table } from "reactstrap";
+import { Link } from "react-router-dom"
 
 export const ListedItemList = (props) => {
     const { listedItems, getListedItems } = useContext(ListedItemContext)
@@ -8,28 +10,33 @@ export const ListedItemList = (props) => {
         getListedItems()
     }, [])
 
-    console.log(listedItems)
 
-    return (
-        <article className="listedItems">
-            {/* <button className="btn btn-2 btn-sep icon-create"
-                onClick={() => { props.history.push("/games/new")
-                }}>
-                Create New Game
-            </button> */}
-            {
-                listedItems.map(li => {
-                    return <section key={`li--${li.id}`} className="li">
-                        {/* <div className="li__edit">
-                            <button className="btn btn-3"
-                                    onClick={e => props.history.push(`/lis/${li.id}/edit`)}
-                                    >Edit</button></div> */}
-                        <div className="li__title">{li.title}</div>
-                        <div className="li__category">{li.category.name}</div>
-                        <div className="li__listing_type">{li.listing_type.name}</div>
-                    </section>
-                })
-            }
-        </article>
+    return(
+        <Table bordered responsive>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Type Of Listing</th>
+                    <th>Category</th>
+                    <th>Item Cost</th>
+                    <th>Days Listed</th>
+                    <th>SOLD?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {listedItems.map(li => {
+                    return(
+                        <tr>
+                            <td><Link>{li.title}</Link></td>
+                            <td>{li.listing_type.name}</td>
+                            <td>{li.category.name}</td>
+                            <td>{li.item_cost}</td>
+                            <td>{li.daysListed}</td>
+                            <td><button>Sold</button></td>
+                        </tr>
+                    )
+                    })}
+            </tbody>
+        </Table>
     )
 }
