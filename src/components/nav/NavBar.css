@@ -1,10 +1,41 @@
 .navbar {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: left;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    float: left;
 }
 
-.navbar__item {
-    flex-basis: 20%;
-    list-style-type: none;
+#navbar {
+    justify-content: space-around;
+    position:fixed;
+    background: goldenrod;
+}
+
+.sidebar {
+    position: static;
+    min-height: 100vh !important;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.navbar__item_main {
+    align-content:center;
+    margin-top: 40px;
+    max-width: 130px;
+}
+
+.logo{
+    position: fixed;
+    top:0;
+    padding-top: 30px;
+}
+
+.logout {
+    position:fixed;
+    bottom: 0;
+    padding-bottom:30px;
+}
+
+.nav-button {
+    max-width: 130px;
 }

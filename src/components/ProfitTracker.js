@@ -1,4 +1,5 @@
 import React from "react"
+import "./ProfitTracker.css"
 import { Route, Redirect } from "react-router-dom"
 import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
@@ -11,7 +12,9 @@ export const ProfitTracker = (props) => (
             if (localStorage.getItem("user_token")) {
                 return <>
                     <Route render={NavBar} />
-                    <Route render={props => <ApplicationViews {...props} />} />
+                    <div className="content_body">
+                        <Route render={props => <ApplicationViews {...props} />} />
+                    </div>
                 </>
             } else {
                 return <Redirect to="/login" />

@@ -15,8 +15,20 @@ export const ListedItemProvider = (props) => {
             .then(setListedItems)
     }
 
+    const addItem = item => {
+        return fetch("http://localhost:8000/listeditems", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            },
+            body: JSON.stringify(item)
+        })
+            .then(getListedItems)
+    }
+
     return (
-        <ListedItemContext.Provider value={{ listedItems, getListedItems }} >
+        <ListedItemContext.Provider value={{ listedItems, getListedItems, addItem }} >
             { props.children }
         </ListedItemContext.Provider>
     )

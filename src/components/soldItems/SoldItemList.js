@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { SoldItemContext } from "./SoldItemProvider.js"
+import { Table } from "reactstrap";
+import { Link } from "react-router-dom"
 
 export const SoldItemList = (props) => {
     const { soldItems, getSoldItems } = useContext(SoldItemContext)
@@ -9,26 +11,35 @@ export const SoldItemList = (props) => {
     }, [])
 
     return (
-        <article className="soldItems">
-            {/* <button className="btn btn-2 btn-sep icon-create"
-                onClick={() => { props.history.push("/games/new")
-                }}>
-                Create New Game
-            </button> */}
-            {
-                soldItems.map(si => {
-                    return <section key={`li--${si.id}`} className="li">
-                        {/* <div className="li__edit">
-                            <button className="btn btn-3"
-                                    onClick={e => props.history.push(`/lis/${li.id}/edit`)}
-                                    >Edit</button></div> */}
-                        <div className="li__title">{si.title}</div>
-                        <div className="li__category">{si.category.name}</div>
-                        <div className="li__listing_type">{si.listing_type.name}</div>
-                        <div className="li__listing_type">${si.item_paid}</div>
-                    </section>
-                })
-            }
-        </article>
+        <Table bordered responsive>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Item Cost</th>
+                    <th>Shipping Cost</th>
+                    <th>Item Paid</th>
+                    <th>Shipping Paid</th>
+                    <th>Total Profit</th>
+                    <th>Percentage Of Profit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {soldItems.map(si => {
+                    return(
+                        <tr>
+                            <td><Link>{si.title}</Link></td>
+                            <td>{si.category.name}</td>
+                            <td>{si.item_cost}</td>
+                            <td>{si.shipping_cost}</td>
+                            <td>{si.item_paid}</td>
+                            <td>{si.shipping_paid}</td>
+                            <td>{si.profit_per_item}</td>
+                            <td>{si.profit_per_item_percentage}</td>
+                        </tr>
+                    )
+                    })}
+            </tbody>
+        </Table>
     )
 }

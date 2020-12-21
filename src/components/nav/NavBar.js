@@ -4,34 +4,56 @@ import "./NavBar.css"
 
 export const NavBar = (props) => {
     return (
-        <ul className="navbar">
-            <li className="navbar__item">
-                <Link className="nav-link" to="/listeditems">Listed Items</Link>
-            </li>
-            <li className="navbar__item">
-                <Link className="nav-link" to="/solditems">Sold Items</Link>
-            </li>
-            <li className="navbar__item">
-                <Link className="nav-link" to="/expenses">Expenses</Link>
-            </li>
+        <div className="navbar sidebar" id="navbar">
+
+            <div className="logo">Logo Goes Here</div>
+            <div className="navbar__mainlinks">
+                <div className="navbar__item_main">
+                    <button className="nav-button "
+                            onClick={() => {
+                                props.history.push({ pathname: "/listeditems" })
+                            }}
+                        >Listed Items</button>
+                </div>
+                <div className="navbar__item_main">
+                <button className="nav-link " width="130"
+                            onClick={() => {
+                                props.history.push({ pathname: "/solditems" })
+                            }}
+                        >Sold Items</button>
+                </div>
+                <div className="navbar__item_main">
+                <button className="nav-link "
+                            onClick={() => {
+                                props.history.push({ pathname: "/expenses" })
+                            }}
+                        >Expenses</button>
+                </div>
+            </div>
+
+            <div className="navbar__item">
+                <button className="nav-link" onClick={() => {
+                    props.history.push({ pathname: "/newitem" })
+                }}>Add Item</button>
+            </div>
             {
                 (localStorage.getItem("user_token") !== null) ?
-                    <li className="nav-item">
-                        <button className="nav-link fakeLink"
+                    <div className="nav-item logout">
+                        <button className="nav-link "
                             onClick={() => {
                                 localStorage.removeItem("user_token")
                                 props.history.push({ pathname: "/login" })
                             }}
                         >Logout</button>
-                    </li> :
+                    </div> :
                     <>
-                        <li className="nav-item">
+                        <div className="nav-item">
                             <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
+                        </div>
+                        <div className="nav-item">
                             <Link className="nav-link" to="/register">Register</Link>
-                        </li>
+                        </div>
                     </>
-            }        </ul>
+            }        </div>
     )
 }
