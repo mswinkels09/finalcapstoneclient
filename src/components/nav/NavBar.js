@@ -30,11 +30,17 @@ export const NavBar = (props) => {
                         >Expenses</button>
                 </div>
             </div>
-
-            <div className="navbar__item">
-                <button className="nav-link" onClick={() => {
-                    props.history.push({ pathname: "/newitem" })
-                }}>Add Item</button>
+            <div className="navbar__item_add">
+                <div className="navbar__item">
+                    <button className="nav-link" onClick={() => {
+                        props.history.push({ pathname: "/newitem" })
+                    }}>Add Item</button>
+                </div>
+                <div className="navbar__item">
+                    <button className="nav-link" onClick={() => {
+                        props.history.push({ pathname: "/addexpense" })
+                    }}>Add Expense</button>
+                </div>
             </div>
             {
                 (localStorage.getItem("user_token") !== null) ?

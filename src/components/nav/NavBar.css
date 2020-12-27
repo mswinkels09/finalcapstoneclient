@@ -39,3 +39,11 @@
 .nav-button {
     max-width: 130px;
 }
+
+.navbar__item_add {
+    padding-bottom: 40px;
+}
+
+.navbar__item {
+    padding-bottom: 10px;
+}
