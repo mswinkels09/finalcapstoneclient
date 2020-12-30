@@ -6,8 +6,9 @@ import { ListedItemProvider } from "./listedItems/ListedItemProvider";
 import { SoldItemList } from "./soldItems/SoldItemList";
 import { SoldItemProvider } from "./soldItems/SoldItemProvider";
 import { ExpenseList } from "./expenses/ExpenseList";
-import { ExpenseProvider } from "./expenses/ExpenseProvider";
 import { TypesProvider } from "./TypesProvider";
+import { ExpenseForm } from "./expenses/ExpensesForm";
+import { ExpenseProvider } from "./expenses/ExpenseProvider";
 
 export const ApplicationViews = (props) => {
     return <>
@@ -25,13 +26,16 @@ export const ApplicationViews = (props) => {
             <Route exact path="/solditems">
                 <SoldItemList {...props} />
             </Route>
-
-            {/* <Route exact path="/games/:gameId(/d+)/edit" render={props => <GameForm {...props} />} /> */}
         </SoldItemProvider>
         <ExpenseProvider>
-            <Route exact path="/expenses">
-                <ExpenseList {...props} />
-            </Route>
+            <TypesProvider>
+                <Route exact path="/expenses">
+                    <ExpenseList {...props} />
+                </Route>
+                <Route exact path="/addexpense">
+                    <ExpenseForm {...props} />
+                </Route>
+            </TypesProvider>
         </ExpenseProvider>
     </>
 }
