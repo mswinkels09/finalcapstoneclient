@@ -4,6 +4,7 @@ export const ExpenseContext = React.createContext()
 
 export const ExpenseProvider = (props) => {
     const [ expenses, setExpenses ] = useState([])
+    const [singleExpense, setExpense] = useState({supply_type: {}})
 
     const getExpenses = () => {
         return fetch("http://localhost:8000/expenses", {
@@ -25,9 +26,17 @@ export const ExpenseProvider = (props) => {
         })
             .then(getExpenses)
     }
+    const getSingleExpense = (expense) => {
+        return fetch(`http://localhost:8000/expenses/${expense}`, {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            }})
+            .then(res => res.json())
+            .then(setExpense)
+    }
 
     return (
-        <ExpenseContext.Provider value={{ expenses, getExpenses, addExpense }} >
+        <ExpenseContext.Provider value={{ expenses, getExpenses, addExpense, singleExpense, getSingleExpense }} >
             { props.children }
         </ExpenseContext.Provider>
     )
