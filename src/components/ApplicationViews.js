@@ -9,6 +9,7 @@ import { ExpenseList } from "./expenses/ExpenseList";
 import { TypesProvider } from "./TypesProvider";
 import { ExpenseForm } from "./expenses/ExpensesForm";
 import { ExpenseProvider } from "./expenses/ExpenseProvider";
+import { ExpenseDetails } from "./expenses/ExpenseDetail";
 
 export const ApplicationViews = (props) => {
     return <>
@@ -34,6 +35,9 @@ export const ApplicationViews = (props) => {
                 </Route>
                 <Route exact path="/addexpense">
                     <ExpenseForm {...props} />
+                </Route>
+                <Route exact path="/expenses/:expenseId(\d+)">
+                    <ExpenseDetails {...props} />
                 </Route>
             </TypesProvider>
         </ExpenseProvider>
