@@ -25,8 +25,21 @@ export const SoldItemProvider = (props) => {
             .then(setSingleSoldItem)
     }
 
+    const editSoldItem = item => {
+        debugger
+        return fetch(`http://localhost:8000/solditems/${item.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            },
+            body: JSON.stringify(item)
+        })
+            .then(getSoldItems)
+    }
+
     return (
-        <SoldItemContext.Provider value={{ soldItems, getSoldItems, getSingleSoldItem, singleSoldItem }} >
+        <SoldItemContext.Provider value={{ soldItems, getSoldItems, getSingleSoldItem, singleSoldItem, editSoldItem }} >
             { props.children }
         </SoldItemContext.Provider>
     )

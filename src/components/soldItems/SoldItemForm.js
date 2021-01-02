@@ -7,7 +7,7 @@ export const SoldItemDetails = (props) => {
     useEffect(() => {
         const soldItemId = parseInt(window.location.pathname.split('/')[2])
         getSingleSoldItem(soldItemId)
-    }, {})
+    })
 
     console.log(singleSoldItem)
 
