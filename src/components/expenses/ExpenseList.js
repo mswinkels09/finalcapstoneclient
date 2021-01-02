@@ -36,8 +36,6 @@ export const ExpenseList = (props) => {
             setCurrentSort('default');
         else if (currentSort === 'default') 
             setCurrentSort('down');
-
-		
     };
     
     return(

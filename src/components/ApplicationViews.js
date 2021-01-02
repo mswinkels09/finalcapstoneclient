@@ -10,6 +10,8 @@ import { TypesProvider } from "./TypesProvider";
 import { ExpenseForm } from "./expenses/ExpensesForm";
 import { ExpenseProvider } from "./expenses/ExpenseProvider";
 import { ExpenseDetails } from "./expenses/ExpenseDetail";
+import { ListedItemDetails } from "./listedItems/ListedItemDetail";
+import { SoldItemDetails } from "./soldItems/SoldItemDetail";
 
 export const ApplicationViews = (props) => {
     return <>
@@ -21,11 +23,17 @@ export const ApplicationViews = (props) => {
                 <Route exact path="/newitem">
                     <ItemForm {...props} />
                 </Route>
+                <Route exact path="/listeditems/:listedItemId(\d+)">
+                    <ListedItemDetails {...props} />
+                </Route>
             </TypesProvider>
         </ListedItemProvider>
         <SoldItemProvider>
             <Route exact path="/solditems">
                 <SoldItemList {...props} />
+            </Route>
+            <Route exact path="/solditems/:soldItemId(\d+)">
+                    <SoldItemDetails {...props} />
             </Route>
         </SoldItemProvider>
         <ExpenseProvider>
