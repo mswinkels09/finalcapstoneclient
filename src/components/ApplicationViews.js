@@ -26,6 +26,9 @@ export const ApplicationViews = (props) => {
                 <Route exact path="/listeditems/:listedItemId(\d+)">
                     <ListedItemDetails {...props} />
                 </Route>
+                <Route exact path="/listeditems/:listedItemId(\d+)/edit">
+                    <ItemForm {...props} />
+                </Route>
             </TypesProvider>
         </ListedItemProvider>
         <SoldItemProvider>
@@ -46,6 +49,9 @@ export const ApplicationViews = (props) => {
                 </Route>
                 <Route exact path="/expenses/:expenseId(\d+)">
                     <ExpenseDetails {...props} />
+                </Route>
+                <Route exact path="/expenses/:expenseId(\d+)/edit">
+                    <ExpenseForm {...props} />
                 </Route>
             </TypesProvider>
         </ExpenseProvider>

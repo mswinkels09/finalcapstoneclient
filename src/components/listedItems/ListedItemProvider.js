@@ -28,6 +28,18 @@ export const ListedItemProvider = (props) => {
             .then(getListedItems)
     }
 
+    const editListedItem = item => {
+        return fetch(`http://localhost:8000/listeditems/${item.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            },
+            body: JSON.stringify(item)
+        })
+            .then(getListedItems)
+    }
+
     const getSingleListedItem = (item) => {
         return fetch(`http://localhost:8000/listeditems/${item}`, {
             headers:{
@@ -36,9 +48,20 @@ export const ListedItemProvider = (props) => {
             .then(res => res.json())
             .then(setSingleListedItem)
     }
+    const deleteListedItem = (itemId) => {
+        return fetch(`http://localhost:8000/listeditems/${itemId}`, {
+            method: "DELETE",
+            headers:{
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            },
+        })
+            .then(setSingleListedItem)
+    }
 
     return (
-        <ListedItemContext.Provider value={{ listedItems, getListedItems, addItem, getSingleListedItem, singleListedItem }} >
+        <ListedItemContext.Provider value={{ listedItems, getListedItems, addItem, getSingleListedItem, 
+        singleListedItem, deleteListedItem, editListedItem }} >
             { props.children }
         </ListedItemContext.Provider>
     )
