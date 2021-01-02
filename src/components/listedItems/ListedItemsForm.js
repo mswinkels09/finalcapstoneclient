@@ -4,21 +4,12 @@ import { ListedItemContext } from "./ListedItemProvider";
 import {  Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 export const ItemForm = props => {
-    const{addItem, listedItems} = useContext(ListedItemContext)
+    const{addItem, listedItems, editListedItem} = useContext(ListedItemContext)
     const{categories, getCategories, listingTypes, getListingTypes, weightTypes, getWeightTypes} = useContext(TypesContext)
 
-    const [item, setItem] = useState({
-        title: "",
-        unique_item_id: parseInt(""),
-        item_weight: parseInt(""),
-        weight_type_id: 0,
-        item_cost: parseInt(""),
-        date_listed: "",
-        category_id: 0,
-        listing_type_id: 0,
-        listing_fee: parseInt(""),
-        notes: ""
-    })
+    const [item, setItem] = useState({})
+
+    const itemPathId = parseInt(window.location.pathname.split('/')[2])
 
     const findWeightTypePercentage = weightTypes.find(wt => {
         return parseInt(item.weight_type_id)===parseInt(wt.id)
@@ -31,6 +22,10 @@ export const ItemForm = props => {
         getWeightTypes()
     }, [])
 
+    useEffect(() => {
+        getItemInEditMode()
+    }, {itemPathId})
+
     const calculateItemCost = (item) => {
         if (item.weight_type_id === "3") {
             return item.item_cost
@@ -39,13 +34,52 @@ export const ItemForm = props => {
         }
     }
 
+    const getItemInEditMode = () => {
+        const selectedItem = listedItems.find(item => item.id === itemPathId) || {}
+        setItem(selectedItem)
+    }
+
 
     const handleControlledInputChange = (event) => {
         const newItemState = Object.assign({}, item)
         newItemState[event.target.name] = event.target.value
         setItem(newItemState)
     }
-    console.log(item)
+
+    const constructNewItem = () => {
+        debugger
+        if (itemPathId) {
+            editListedItem({
+                id: item.id,
+                title: item.title,
+                unique_item_id: parseInt(item.unique_item_id),
+                item_weight: parseInt(item.item_weight),
+                weight_type_id: parseInt(item.weight_type_id),
+                item_cost: item.item_cost,
+                date_listed: item.date_listed,
+                category_id: parseInt(item.category_id),
+                listing_type_id: parseInt(item.listing_type_id),
+                listing_fee: parseFloat(item.listing_fee),
+                notes: item.notes
+            })
+
+                .then(() => props.history.push("/listedItems"))
+        } else {
+            addItem({
+                title: item.title,
+                unique_item_id: parseInt(item.unique_item_id),
+                item_weight: parseInt(item.item_weight),
+                weight_type_id: parseInt(item.weight_type_id),
+                item_cost: parseFloat(calculateItemCost(item)),
+                date_listed: item.date_listed,
+                category_id: parseInt(item.category_id),
+                listing_type_id: parseInt(item.listing_type_id),
+                listing_fee: parseFloat(item.listing_fee),
+                notes: item.notes
+            })
+                .then(() => props.history.push("/listedItems"))
+        }
+    }
 
     return(
         <>
@@ -120,30 +154,14 @@ export const ItemForm = props => {
                     onChange={handleControlledInputChange }/>
             </FormGroup>
         </Form>
-        <button type="submit"
-                    onClick={evt => {
-                        // Prevent form from being submitted
-                        evt.preventDefault()
-                        console.log(findWeightTypePercentage, "weighttype")
-    
-                        const newitem = {
-                            title: item.title,
-                            unique_item_id: parseInt(item.unique_item_id),
-                            item_weight: parseInt(item.item_weight),
-                            weight_type_id: parseInt(item.weight_type_id),
-                            item_cost: parseFloat(calculateItemCost(item)),
-                            date_listed: item.date_listed,
-                            category_id: parseInt(item.category_id),
-                            listing_type_id: parseInt(item.listing_type_id),
-                            listing_fee: parseFloat(item.listing_fee),
-                            notes: item.notes
-                        }
-    
-                        // Send POST request to your API
-                        addItem(newitem)
-                            .then(props.history.push("/listedItems"))
-                    }}
-                    className="btn btn-primary">Save</button>
+        <button
+            onClick={evt => {
+                evt.preventDefault() 
+                constructNewItem()
+            }}
+                className="btn btn-primary">
+                    {itemPathId ?"Save" :"Submit"}
+        </button>
         </>
     )
 }

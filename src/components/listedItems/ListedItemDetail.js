@@ -2,14 +2,23 @@ import React, { useContext, useEffect} from "react"
 import { ListedItemContext } from "./ListedItemProvider.js"
 
 export const ListedItemDetails = (props) => {
-    const { singleListedItem, getSingleListedItem } = useContext(ListedItemContext)
+    const { singleListedItem, getSingleListedItem, deleteListedItem } = useContext(ListedItemContext)
 
     useEffect(() => {
         const listedItemId = parseInt(window.location.pathname.split('/')[2])
         getSingleListedItem(listedItemId)
-    })
+    }, {})
 
-    console.log(singleListedItem)
+    const delete_prompt = (id) => {
+        var retVal = window.confirm("This action will permanently delete the item. Are you sure?");
+        if( retVal == true ) {
+            deleteListedItem(id)
+            props.history.push("/expenses")
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     return (
     <>
@@ -30,6 +39,11 @@ export const ListedItemDetails = (props) => {
             <div>{singleListedItem.listing_fee}</div>
             <h5>Notes</h5>
             <div>{singleListedItem.notes}</div>
+            <div className="expense__edit">
+        <button className="btn btn-3"
+            onClick={() => props.history.push(`/listedItems/${singleListedItem.id}/edit`)}
+            >Edit</button></div>
+        <button className="btn" onClick={() => delete_prompt(singleListedItem.id)}>Delete</button>
     </>
     )
 }

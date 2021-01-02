@@ -4,23 +4,52 @@ import { ExpenseContext } from "./ExpenseProvider";
 import {  Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 export const ExpenseForm = props => {
-    const{addExpense, expenses} = useContext(ExpenseContext)
+    const{addExpense, expenses, editExpense} = useContext(ExpenseContext)
     const{supplyTypes, getSupplyTypes} = useContext(TypesContext)
 
-    const [expense, setExpense] = useState({
-        suppply_type_id: parseInt(""),
-        date_purchased: "",
-        cost: parseInt("")
-    })
+    const expensePathId = parseInt(window.location.pathname.split('/')[2])
+
+    const [expense, setExpense] = useState({})
 
     useEffect(() => {
         getSupplyTypes()
     }, [])
+    
+    useEffect(() => {
+        getExpenseInEditMode()
+    }, {expensePathId})
 
     const handleControlledInputChange = (event) => {
         const newExpenseState = Object.assign({}, expense)
         newExpenseState[event.target.name] = event.target.value
         setExpense(newExpenseState)
+    }
+
+    const getExpenseInEditMode = () => {
+            const selectedExpense = expenses.find(expense => expense.id === expensePathId) || {}
+            setExpense(selectedExpense)
+    }
+
+    const constructNewExpense = () => {
+        if (expensePathId) {
+            editExpense({
+                id: expense.id,
+                supply_type_id: parseInt(expense.supply_type_id),
+                date_purchased: expense.date_purchased,
+                cost: expense.cost,
+                image: ""
+            })
+
+                .then(() => props.history.push("/expenses"))
+        } else {
+            addExpense({
+                supply_type_id: parseInt(expense.supply_type_id),
+                date_purchased: expense.date_purchased,
+                cost: expense.cost,
+                image: ""
+            })
+                .then(() => props.history.push("/expenses"))
+        }
     }
 
     return(
@@ -49,23 +78,14 @@ export const ExpenseForm = props => {
                     onChange={handleControlledInputChange}/>
             </FormGroup>
         </Form>
-        <button type="submit"
-                    onClick={evt => {
-                        // Prevent form from being submitted
-                        evt.preventDefault()
-    
-                        const newexpense = {
-                            supply_type_id: parseInt(expense.supply_type_id),
-                            date_purchased: expense.date_purchased,
-                            cost: parseFloat(expense.cost),
-                            image: ""
-                        }
-    
-                        // Send POST request to your API
-                        addExpense(newexpense)
-                            .then(props.history.push("/expenses"))
-                    }}
-                    className="btn btn-primary">Save</button>
+        <button
+            onClick={evt => {
+                evt.preventDefault() 
+                constructNewExpense()
+            }}
+                className="btn btn-primary">
+                    {expensePathId ?"Save" :"Submit"}
+        </button>
         </>
         )
 }

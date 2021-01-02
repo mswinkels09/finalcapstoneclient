@@ -35,8 +35,31 @@ export const ExpenseProvider = (props) => {
             .then(setExpense)
     }
 
+    const editExpense = expense => {
+        return fetch(`http://localhost:8000/expenses/${expense.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            },
+            body: JSON.stringify(expense)
+        })
+            .then(getExpenses)
+    }
+
+    const deleteExpense = expenseId => {
+        return fetch(`http://localhost:8000/expenses/${expenseId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            },
+        })
+            .then(getExpenses)
+    }
+
     return (
-        <ExpenseContext.Provider value={{ expenses, getExpenses, addExpense, singleExpense, getSingleExpense }} >
+        <ExpenseContext.Provider value={{ expenses, getExpenses, addExpense, singleExpense, getSingleExpense, editExpense, deleteExpense }} >
             { props.children }
         </ExpenseContext.Provider>
     )
