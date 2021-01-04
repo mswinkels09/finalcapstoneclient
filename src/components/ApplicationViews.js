@@ -12,9 +12,18 @@ import { ExpenseProvider } from "./expenses/ExpenseProvider";
 import { ExpenseDetails } from "./expenses/ExpenseDetail";
 import { ListedItemDetails } from "./listedItems/ListedItemDetail";
 import { SoldItemDetails } from "./soldItems/SoldItemDetail";
+import { ExpenseSupplyTypeChart, ExpenseMonthChart } from "./expenses/ExpenseChart";
+import { ProfitProvider } from "./profit/ProfitProvider";
+import { ProfitListingTypeChart, ProfitCategoriesChart } from "./profit/ProfitChart";
 
 export const ApplicationViews = (props) => {
     return <>
+        <ProfitProvider>
+            <Route exact path="/profit">
+                <ProfitListingTypeChart {...props} />
+                <ProfitCategoriesChart {...props} />
+            </Route>
+        </ProfitProvider>
         <ListedItemProvider>
             <TypesProvider>
                 <Route exact path="/listeditems">
@@ -42,6 +51,8 @@ export const ApplicationViews = (props) => {
         <ExpenseProvider>
             <TypesProvider>
                 <Route exact path="/expenses">
+                    <ExpenseSupplyTypeChart {...props} />
+                    <ExpenseMonthChart {...props} />
                     <ExpenseList {...props} />
                 </Route>
                 <Route exact path="/addexpense">

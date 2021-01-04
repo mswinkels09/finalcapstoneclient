@@ -4,6 +4,8 @@ export const ExpenseContext = React.createContext()
 
 export const ExpenseProvider = (props) => {
     const [ expenses, setExpenses ] = useState([])
+    const [ supplyTypeExpenses, setSupplyTypeExpenses ] = useState([])
+    const [ monthExpenses, setMonthExpenses ] = useState([])
     const [singleExpense, setExpense] = useState({supply_type: {}})
 
     const getExpenses = () => {
@@ -15,6 +17,27 @@ export const ExpenseProvider = (props) => {
             .then(response => response.json())
             .then(setExpenses)
     }
+
+    const getExpensesBySupplyType = () => {
+        return fetch("http://localhost:8000/expensesbysupplytype", {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            }
+        })
+            .then(response => response.json())
+            .then(setSupplyTypeExpenses)
+    }
+
+    const getExpensesByMonth = () => {
+        return fetch("http://localhost:8000/expensesbymonth", {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            }
+        })
+            .then(response => response.json())
+            .then(setMonthExpenses)
+    }
+
     const addExpense = expense => {
         return fetch("http://localhost:8000/expenses", {
             method: "POST",
@@ -59,7 +82,8 @@ export const ExpenseProvider = (props) => {
     }
 
     return (
-        <ExpenseContext.Provider value={{ expenses, getExpenses, addExpense, singleExpense, getSingleExpense, editExpense, deleteExpense }} >
+        <ExpenseContext.Provider value={{ expenses, getExpenses, addExpense, singleExpense, 
+        getSingleExpense, editExpense, deleteExpense, getExpensesBySupplyType, supplyTypeExpenses, getExpensesByMonth, monthExpenses }} >
             { props.children }
         </ExpenseContext.Provider>
     )
