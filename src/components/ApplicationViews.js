@@ -14,7 +14,7 @@ import { ListedItemDetails } from "./listedItems/ListedItemDetail";
 import { SoldItemDetails } from "./soldItems/SoldItemDetail";
 import { ExpenseSupplyTypeChart, ExpenseMonthChart } from "./expenses/ExpenseChart";
 import { ProfitProvider } from "./profit/ProfitProvider";
-import { ProfitListingTypeChart, ProfitCategoriesChart } from "./profit/ProfitChart";
+import { ProfitListingTypeChart, ProfitCategoriesChart, ProfitMonthChart, ProfitYearChart } from "./profit/ProfitChart";
 
 export const ApplicationViews = (props) => {
     return <>
@@ -22,6 +22,8 @@ export const ApplicationViews = (props) => {
             <Route exact path="/profit">
                 <ProfitListingTypeChart {...props} />
                 <ProfitCategoriesChart {...props} />
+                <ProfitMonthChart {...props} />
+                <ProfitYearChart {...props} />
             </Route>
         </ProfitProvider>
         <ListedItemProvider>
