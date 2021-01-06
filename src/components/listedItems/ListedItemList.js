@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ListedItemContext } from "./ListedItemProvider.js"
 import { SoldItemContext } from "../soldItems/SoldItemProvider.js"
-import { Form, Table, FormGroup, Input } from "reactstrap";
+import { Form, Table, FormGroup, Input, Button } from "reactstrap";
 import { Link } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import "./ListedItems.css";
@@ -110,7 +110,7 @@ export const ListedItemList = (props) => {
                                     <td>{li.daysListed}</td>
                                     <td>
                                         <Popup
-                                            trigger={<button id={li.id}>Sold?</button>}
+                                            trigger={<Button color="success"id={li.id}>Sold?</Button>}
                                             modal>
                                             {close => (
                                                 <div>
@@ -152,7 +152,7 @@ export const ListedItemList = (props) => {
                                                         </FormGroup>
                                                         
                                                     </Form>
-                                                    <button
+                                                    <Button color="success"
                                                         onClick={evt => {
                                                             evt.preventDefault()
                                                             editListedItemToSold(li.id)
@@ -160,7 +160,7 @@ export const ListedItemList = (props) => {
                                                         }}
                                                             className="btn btn-primary">
                                                                 Save
-                                                    </button>
+                                                    </Button>
                                                 </div>
 
                                             )}

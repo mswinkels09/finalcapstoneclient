@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
 import { TypesContext } from "../TypesProvider";
 import { ExpenseContext } from "./ExpenseProvider";
-import {  Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import {  Button, Form, FormGroup, Label, Input, FormText} from "reactstrap";
 import "./Expenses.css"
 
 export const ExpenseForm = props => {
@@ -83,14 +83,14 @@ export const ExpenseForm = props => {
                             onChange={handleControlledInputChange}/>
                     </FormGroup>
                     <div className="form__buttons">
-                        <button
+                        <Button color="success"
                             onClick={evt => {
                                 evt.preventDefault() 
                                 constructNewExpense()
                             }}
                                 className="btn btn-primary">
                                     {expensePathId ?"Save" :"Submit"}
-                        </button>
+                        </Button>
                     </div>
                 </Form>
             </div>

@@ -2,14 +2,14 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: space-around;
     float: left;
 }
 
 #navbar {
-    justify-content: space-around;
+    justify-content: space-evenly;
     position:fixed;
-    background: goldenrod;
+    border-right: 5px #555652 solid
+    
 }
 
 .sidebar {
@@ -20,14 +20,19 @@
 
 .navbar__item_main {
     align-content:center;
-    margin-top: 40px;
+    margin-top: 20px;
     max-width: 130px;
+}
+
+.navbar__item_main_top {
+    align-content:center;
+    max-width: 130px;
+    margin-top: 100px;
 }
 
 .logo{
     position: fixed;
     top:0;
-    padding-top: 30px;
 }
 
 .logout {
