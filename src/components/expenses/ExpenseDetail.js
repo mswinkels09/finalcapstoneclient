@@ -1,3 +1,4 @@
+import { Button } from "reactstrap"
 import React, { useContext, useEffect, useState, useMemo } from "react"
 import { ExpenseContext } from "./ExpenseProvider.js"
 import "./Expenses.css"
@@ -47,10 +48,10 @@ export const ExpenseDetails = (props) => {
             </div>
         </div>
             <div className="expense_detail__buttons center_item_details">
-                    <button className="btn btn-3"
+                    <Button color="success" className="btn btn-3"
                         onClick={() => props.history.push(`/expenses/${singleExpense.id}/edit`)}
-                        >Edit</button>
-                    <button className="btn" onClick={() => delete_prompt(singleExpense.id)}>Delete</button>
+                        >Edit</Button>
+                    <Button color="success" className="btn" onClick={() => delete_prompt(singleExpense.id)}>Delete</Button>
             </div>
     </div>
     )

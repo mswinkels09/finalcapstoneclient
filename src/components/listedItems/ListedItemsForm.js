@@ -164,14 +164,14 @@ export const ItemForm = props => {
                             onChange={handleControlledInputChange }/>
                     </FormGroup>
                     <div className="form__buttons">
-                        <button
+                        <Button color="success"
                             onClick={evt => {
                                 evt.preventDefault() 
                                 constructNewItem()
                             }}
                                 className="btn btn-primary">
                                     {itemPathId ?"Save" :"Submit"}
-                        </button>
+                        </Button>
                     </div>
                 </Form>
             </div>

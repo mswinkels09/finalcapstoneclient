@@ -1,6 +1,7 @@
 import React, { useContext, useEffect} from "react"
 import { SoldItemContext } from "./SoldItemProvider.js"
 import "./SoldItems.css"
+import { Button } from "reactstrap";
 
 export const SoldItemDetails = (props) => {
     const { singleSoldItem, getSingleSoldItem, editSoldItem } = useContext(SoldItemContext)
@@ -99,9 +100,9 @@ export const SoldItemDetails = (props) => {
             </div>
         </div>
         <div className="expense_detail__buttons center_item_details">
-            <button className="btn btn-3"
+            <Button color="success" className="btn btn-3"
             onClick={() => props.history.push(`/soldItems/${singleSoldItem.id}/edit`)}
-            >Edit</button>
+            >Edit</Button>
         </div>
     </div>
     )

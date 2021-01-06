@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useMemo } from "react"
 import { ExpenseContext } from "./ExpenseProvider.js"
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 import {ExpenseChart} from "./ExpenseChart"
 import "./Expenses.css"
 
@@ -74,7 +74,7 @@ export const ExpenseList = (props) => {
                                         <td>{e.date_purchased}</td>
                                         <td>{e.supply_type.name}</td>
                                         <td>${e.cost.toFixed(2)}</td>
-                                        <td><button type="button" onClick={() => props.history.push(`/expenses/${e.id}`)}>View</button></td>
+                                        <td><Button color="success" type="button" onClick={() => props.history.push(`/expenses/${e.id}`)}>View</Button></td>
                                     </tr>
                                 )
                             })}

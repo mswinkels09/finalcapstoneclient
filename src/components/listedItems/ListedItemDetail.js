@@ -1,6 +1,7 @@
 import React, { useContext, useEffect} from "react"
 import { ListedItemContext } from "./ListedItemProvider.js"
 import "./ListedItems.css"
+import { Button } from "reactstrap";
 
 export const ListedItemDetails = (props) => {
     const { singleListedItem, getSingleListedItem, deleteListedItem } = useContext(ListedItemContext)
@@ -76,10 +77,10 @@ export const ListedItemDetails = (props) => {
             </div>
         </div>
         <div className="expense_detail__buttons center_item_details">
-            <button className="btn btn-3"
+            <Button color="success" className="btn btn-3"
                 onClick={() => props.history.push(`/listedItems/${singleListedItem.id}/edit`)}
-                >Edit</button>
-            <button className="btn" onClick={() => delete_prompt(singleListedItem.id)}>Delete</button>
+                >Edit</Button>
+            <Button color="success" className="btn" onClick={() => delete_prompt(singleListedItem.id)}>Delete</Button>
         </div>
     </div>
     )

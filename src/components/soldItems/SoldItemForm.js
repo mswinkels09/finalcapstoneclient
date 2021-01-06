@@ -137,14 +137,14 @@ export const SoldItemForm = (props) => {
                 </FormGroup>
             </Form>
             <div className="form__buttons">
-                <button
+                <Button color="success"
                     onClick={evt => {
                         evt.preventDefault()
                         updateSoldItem(singleSoldItem.id)
                     }}
                         className="btn btn-primary">
                             Save
-                </button>
+                </Button>
             </div>
         </div>
     </>
