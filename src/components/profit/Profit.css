@@ -1,0 +1,31 @@
+.profit__main {
+    position: fixed;
+    top: 2%;
+    left: 19%;
+}
+
+.chart__main_profit {
+    width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chart__bar {
+    display: flex;
+}
+
+.chart__pie {
+    display: flex;
+}
+
+.chart__div_profit {
+    padding: 0.5rem;
+    width: 500px;
+    border: 3px black solid;
+    margin: 20px;
+}
+
+.chart__title {
+    text-align: center;
+}

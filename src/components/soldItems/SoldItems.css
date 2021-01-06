@@ -1,0 +1,83 @@
+.sold_items__main {
+    padding: 2.5rem;
+}
+
+.detail__main_title_div{
+    display: flex;
+    justify-content: center;
+    border: 3px black solid;
+    width: 450px;
+    height: 110px;
+    text-align: center;
+    padding: 10px;
+    align-content: center;
+    flex-direction: column;
+}
+
+.detail__main_title_sold{
+    padding-bottom: 5px;
+}
+
+.detail__sold_title{
+    font-size:40px;
+    font-weight: bold;
+}
+
+.detail__sold_id{
+    font-size:18px;
+    font-style: italic;
+}
+
+.detail__sold_date{
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 10px;;
+}
+
+.detail__div_sold_bottom_row{
+    border: 3px black solid;
+    width: 350px;
+    height: 65px;
+    margin: 10px;
+}
+
+.top_row_sold__details{
+    margin: .5rem;
+}
+
+.detail__div_notes_sold{
+    border: 3px black solid;
+    height: 150px;
+    width: 700px;
+}
+
+.form__div_sold{
+    padding-left: 6rem;
+    padding-right: 6rem;
+    margin: 1rem;
+}
+
+.form__detail_sold{
+    width: 450px;
+    margin: 10px;
+}
+
+.form__detail_sold input{
+    height: 60px;
+}
+
+.form__rows{
+    display: flex;
+    justify-content: center;
+}
+
+.form__sold_notes input{
+    height: 100px;
+    vertical-align: text-top;
+}
+
+.form__detail_placeholder{
+    text-align: center;
+    font-size: 25;
+    font-weight: bold;
+}

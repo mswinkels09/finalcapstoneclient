@@ -1,0 +1,141 @@
+.chart__main_expense {
+    /* width: 500px; */
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 6%;
+}
+
+.expensechart {
+    display: flex;
+    /* width: 500px; */
+    padding: 20px;
+}
+
+.chart__div_expense {
+    padding: 0.5rem;
+    width: 500px;
+    border: 3px black solid;
+}
+
+.chart__div_expense_pie{
+    margin: 20px;
+    margin-right: 50px;
+}
+
+.chart__div_expense_bar{
+    margin: 20px;
+    margin-left: 50px;
+}
+
+.table__main_expense{
+    width: 1200px;
+    border: 3px black solid;
+    padding: 2rem;
+    margin-left: 4%;
+    overflow-y: auto;
+    height:350px;
+    margin: auto;
+}
+
+.expensedetail{
+    padding-top: 1.5rem;
+}
+
+.detail__main_title{
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    border: 3px black solid;
+    width: 450px;
+    height: 100px;
+    text-align: center;
+    padding-top: 10px;
+    align-content: center;
+}
+
+.center_item_details{
+    display:flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.center_item_title{
+    display:flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.detail__data{
+    display: flex;
+    justify-content: center;
+    border: 3px black solid;
+    text-align:center;
+    width: 200px;
+    height: 75px;
+    padding-top: 20px;
+    margin: auto;
+}
+
+.detail__title{
+    border:3px black solid;
+    text-align: center;
+    width: 350px;
+    height:50px;
+    padding-top: 5px;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.expense_detail__buttons{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.expenseform {
+    padding-top: 1.5rem;
+}
+
+.form__main{
+    display:flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.form__buttons{
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    padding: 1rem;
+}
+
+.form__div{
+    border: 3px solid black;
+    padding-left: 6rem;
+    padding-right: 6rem;
+    margin: 2rem;
+}
+
+.form__detail select{
+    width: 500px;
+    height: 75px;
+    font-size: 20px;
+}
+
+.form__detail input{
+    height: 75px;
+    font-size: 20px;
+}
+
+.form__detail{
+    padding:1rem;
+}
+
+.center_item_title_form{
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form__title{
+    text-align: center;
+}

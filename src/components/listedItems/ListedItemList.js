@@ -8,21 +8,21 @@ import "./ListedItems.css";
 
 export const ListedItemList = (props) => {
     const { listedItems, getListedItems } = useContext(ListedItemContext)
-    // const { editSoldItem } = useContext(SoldItemContext)
+    const { editSoldItem } = useContext(SoldItemContext)
 
     const [currentSort, setCurrentSort] = useState(('default'))
     const [item, setItem] = useState({})
 
-    const soldItemId = parseInt(item.id)
+    // const soldItemId = parseInt(item)
 
 
     useEffect(() => {
         getListedItems()
     }, [])
 
-    useEffect(() => {
-        getItemInEditMode()
-    }, {soldItemId})
+    // useEffect(() => {
+    //     findItemId()
+    // }, {soldItemId})
 
     const sortTypes = {
         up: {
@@ -48,11 +48,10 @@ export const ListedItemList = (props) => {
             setCurrentSort('down');
     };
 
-    const selectedItem = listedItems.find(i => i.id === item.id) || {}
 
-    const getItemInEditMode = () => {
-        setItem(selectedItem)
-    }
+    // const findItemId = (obj) => {
+    //     setItem(obj)
+    // }
 
     const handleControlledInputChange = (event) => {
         const newItemState = Object.assign({}, item)
@@ -60,107 +59,120 @@ export const ListedItemList = (props) => {
         setItem(newItemState)
     }
 
-    // const editListedItemToSold = () => {
-    //         editSoldItem({
-    //             id: item.id,
-    //             item_paid: item.item_paid,
-    //             shipping_cost: item.shipping_cost,
-    //             shipping_paid: item.shipping_paid,
-    //             final_value_fee: item.final_value_fee,
-    //             sold_date: item.sold_date,
-    //             returned: false
-    //         })
-    //             .then(() => props.history.push("/soldItems"))
-    // }
+    const editListedItemToSold = (obj) => {
+        debugger
+            editSoldItem({
+                id: obj,
+                item_paid: parseFloat(item.item_paid),
+                shipping_cost: parseFloat(item.shipping_cost),
+                shipping_paid: parseFloat(item.shipping_paid),
+                final_value_fee: parseFloat(item.final_value_fee),
+                sold_date: item.sold_date,
+                returned: false,
+                notes: item.notes
+            })
+                .then(() => props.history.push("/soldItems"))
+    }
 
     return (
-        <Table bordered responsive>
-            <thead>
-                <tr>
-                    <th>Item Name</th>
-                    <th>Type Of Listing</th>
-                    <th>Category</th>
-                    <th>
-                        Item Cost
-                        <button onClick={onSortChange}>
-                            <i className={`fas fa-${sortTypes[currentSort].class}`} />
-                        </button>
-                    </th>
-                    <th>
-                        Days Listed
-                        <button onClick={onSortChange}>
-                            <i className={`fas fa-${sortTypes[currentSort].class}`} />
-                        </button>
-                    </th>
-                    <th>SOLD?</th>
-                </tr>
-            </thead>
-            <tbody>
-                {listedItems.sort(sortTypes[currentSort].fn).map(li => {
-                    return (
+        <div className="listed_items__main">
+            <div className="table__main_listed_items table__main">
+                <div className="table__title">LISTED ITEMS</div>
+                <Table bordered responsive id="table__listed_items" className="table__div">
+                    <thead>
                         <tr>
-                            <td><Link to={{ pathname: `/listeditems/${li.id}` }}>{li.title}</Link></td>
-                            <td>{li.listing_type.name}</td>
-                            <td>{li.category.name}</td>
-                            <td>{li.item_cost}</td>
-                            <td>{li.daysListed}</td>
-                            <td>
-                                <Popup
-                                    trigger={<button>Sold?</button>}
-                                    modal>
-                                    {close => (
-                                        <div>
-                                            <button className="close" onClick={close}>&times;</button>
-                                            <div className="header">
-                                                <div className="popup__header"><strong>Item Sold Form</strong></div>
-                                                <div className="popup__header">{li.title}</div>
-                                            </div>
-                                            <Form className="content">
-                                                <FormGroup>
-                                                    <Input className="popup__content" type="date" name="sold_date" id="sold_date" placeholder="Choose Item's Sold Date"
-                                                        value={item.sold_date}
-                                                        onChange={handleControlledInputChange} />
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Input type="number" name="item_paid" id="item_paid" placeholder="Enter What Customer Paid"
-                                                        value={item.item_paid}
-                                                        onChange={handleControlledInputChange} />
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Input type="number" name="shipping_cost" id="shipping_cost" placeholder="Enter How Much You Paid For Shipping"
-                                                        value={item.shipping_cost}
-                                                        onChange={handleControlledInputChange} />
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Input type="number" name="shipping_paid" id="shipping_paid" placeholder="Enter How Much The Customer Paid For Shipping"
-                                                        value={item.shipping_paid}
-                                                        onChange={handleControlledInputChange} />
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Input type="number" name="final_value_fee" id="final_value_fee" placeholder="Enter Final Value Fees"
-                                                        value={item.final_value_fee}
-                                                        onChange={handleControlledInputChange} />
-                                                </FormGroup>
-                                                
-                                            </Form>
-                                            {/* <button
-                                                onClick={evt => {
-                                                    evt.preventDefault() 
-                                                    editListedItemToSold()
-                                                }}
-                                                    className="btn btn-primary">
-                                                        Save
-                                            </button> */}
-                                        </div>
-
-                                    )}
-                                </Popup>
-
-                            </td>
+                            <th>Item Name</th>
+                            <th>Type Of Listing</th>
+                            <th>Category</th>
+                            <th>
+                                Item Cost
+                                <button onClick={onSortChange}>
+                                    <i className={`fas fa-${sortTypes[currentSort].class}`} />
+                                </button>
+                            </th>
+                            <th>
+                                Days Listed
+                                <button onClick={onSortChange}>
+                                    <i className={`fas fa-${sortTypes[currentSort].class}`} />
+                                </button>
+                            </th>
+                            <th>SOLD?</th>
                         </tr>
-                    )
-                })}
-            </tbody>
-        </Table>
+                    </thead>
+                    <tbody>
+                        {listedItems.sort(sortTypes[currentSort].fn).map(li => {
+                            return (
+                                <tr>
+                                    <td><Link to={{ pathname: `/listeditems/${li.id}` }}>{li.title}</Link></td>
+                                    <td >{li.listing_type.name}</td>
+                                    <td>{li.category.name}</td>
+                                    <td>${li.item_cost.toFixed(2)}</td>
+                                    <td>{li.daysListed}</td>
+                                    <td>
+                                        <Popup
+                                            trigger={<button id={li.id}>Sold?</button>}
+                                            modal>
+                                            {close => (
+                                                <div>
+                                                    <button className="close" onClick={close}>&times;</button>
+                                                    <div className="header">
+                                                        <div className="popup__header"><strong>Item Sold Form</strong></div>
+                                                        <div className="popup__header">{li.title}</div>
+                                                    </div>
+                                                    <Form className="content">
+                                                        <FormGroup>
+                                                            <Input className="popup__content" type="date" name="sold_date" id="sold_date" placeholder="Choose Item's Sold Date"
+                                                                value={item.sold_date}
+                                                                onChange={handleControlledInputChange} />
+                                                        </FormGroup>
+                                                        <FormGroup>
+                                                            <Input type="number" name="item_paid" id="item_paid" placeholder="Enter What Customer Paid"
+                                                                value={item.item_paid}
+                                                                onChange={handleControlledInputChange} />
+                                                        </FormGroup>
+                                                        <FormGroup>
+                                                            <Input type="number" name="shipping_cost" id="shipping_cost" placeholder="Enter How Much You Paid For Shipping"
+                                                                value={item.shipping_cost}
+                                                                onChange={handleControlledInputChange} />
+                                                        </FormGroup>
+                                                        <FormGroup>
+                                                            <Input type="number" name="shipping_paid" id="shipping_paid" placeholder="Enter How Much The Customer Paid For Shipping"
+                                                                value={item.shipping_paid}
+                                                                onChange={handleControlledInputChange} />
+                                                        </FormGroup>
+                                                        <FormGroup>
+                                                            <Input type="number" name="final_value_fee" id="final_value_fee" placeholder="Enter Final Value Fees"
+                                                                value={item.final_value_fee}
+                                                                onChange={handleControlledInputChange} />
+                                                        </FormGroup>
+                                                        <FormGroup>
+                                                            <Input type="text" name="notes" id="notes" placeholder="Update Notes"
+                                                                value={item.notes}
+                                                                onChange={handleControlledInputChange} />
+                                                        </FormGroup>
+                                                        
+                                                    </Form>
+                                                    <button
+                                                        onClick={evt => {
+                                                            evt.preventDefault()
+                                                            editListedItemToSold(li.id)
+                                                            // findItemId(li.id)
+                                                        }}
+                                                            className="btn btn-primary">
+                                                                Save
+                                                    </button>
+                                                </div>
+
+                                            )}
+                                        </Popup>
+
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </div>
+        </div>
     )
 }

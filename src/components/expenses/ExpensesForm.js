@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react"
 import { TypesContext } from "../TypesProvider";
 import { ExpenseContext } from "./ExpenseProvider";
 import {  Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import "./Expenses.css"
 
 export const ExpenseForm = props => {
     const{addExpense, expenses, editExpense} = useContext(ExpenseContext)
@@ -54,38 +55,46 @@ export const ExpenseForm = props => {
 
     return(
         <>
-        <h2>Add New Expense</h2>
-        <Form>
-            <FormGroup>
-                <select name="supply_type_id" id="supply_type" value={expense.supply_type_id}
-                    onChange={handleControlledInputChange}>
-                    <option value="">Select Supply Type</option>
-                    {supplyTypes.map(st => (
-                        <option key={st.id} value={st.id}>
-                            {st.name}
-                        </option>
-                    ))}
-                </select>
-            </FormGroup>
-            <FormGroup>
-                <Input type="date" name="date_purchased" id="date_purchased" placeholder="Select Date" 
-                    value={expense.date_purchased}
-                    onChange={handleControlledInputChange}/>
-            </FormGroup>
-            <FormGroup>
-                <Input type="number" name="cost" id="cost" placeholder="Reciept Total" 
-                    value={expense.cost}
-                    onChange={handleControlledInputChange}/>
-            </FormGroup>
-        </Form>
-        <button
-            onClick={evt => {
-                evt.preventDefault() 
-                constructNewExpense()
-            }}
-                className="btn btn-primary">
-                    {expensePathId ?"Save" :"Submit"}
-        </button>
+        <div className="expenseform">
+            <div className="form__main">
+                <Form className="form__div">
+                    <div className="center_item_title_form">
+                        <h2 className="form__title">{expensePathId ?"Edit Expense" :"Add New Expense"}</h2>
+                    </div>
+                    <FormGroup className="form__detail">
+                        <select name="supply_type_id" id="supply_type" value={expense.supply_type_id}
+                            onChange={handleControlledInputChange}>
+                            <option value="">Select Supply Type</option>
+                            {supplyTypes.map(st => (
+                                <option key={st.id} value={st.id}>
+                                    {st.name}
+                                </option>
+                            ))}
+                        </select>
+                    </FormGroup>
+                    <FormGroup className="form__detail">
+                        <Input type="date" name="date_purchased" id="date_purchased" placeholder="Select Date" 
+                            value={expense.date_purchased}
+                            onChange={handleControlledInputChange}/>
+                    </FormGroup>
+                    <FormGroup className="form__detail">
+                        <Input type="number" name="cost" id="cost" placeholder="Reciept Total" 
+                            value={expense.cost}
+                            onChange={handleControlledInputChange}/>
+                    </FormGroup>
+                    <div className="form__buttons">
+                        <button
+                            onClick={evt => {
+                                evt.preventDefault() 
+                                constructNewExpense()
+                            }}
+                                className="btn btn-primary">
+                                    {expensePathId ?"Save" :"Submit"}
+                        </button>
+                    </div>
+                </Form>
+            </div>
+        </div>
         </>
         )
 }
