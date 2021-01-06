@@ -4,6 +4,7 @@ export const SoldItemContext = React.createContext()
 
 export const SoldItemProvider = (props) => {
     const [ soldItems, setSoldItems ] = useState([])
+    const [ soldItemsByMonth, setSoldItemsByMonth ] = useState([])
     const [singleSoldItem, setSingleSoldItem] = useState({category: {}, listing_type: {}})
 
     const getSoldItems = () => {
@@ -16,6 +17,16 @@ export const SoldItemProvider = (props) => {
             .then(setSoldItems)
     }
 
+    const getSoldItemsByMonth = () => {
+        return fetch("http://localhost:8000/solditemsbymonth", {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("user_token")}`
+            }
+        })
+            .then(response => response.json())
+            .then(setSoldItemsByMonth)
+    }
+
     const getSingleSoldItem = (item) => {
         return fetch(`http://localhost:8000/solditems/${item}`, {
             headers:{
@@ -26,7 +37,6 @@ export const SoldItemProvider = (props) => {
     }
 
     const editSoldItem = item => {
-        debugger
         return fetch(`http://localhost:8000/solditems/${item.id}`, {
             method: "PUT",
             headers: {
@@ -39,7 +49,7 @@ export const SoldItemProvider = (props) => {
     }
 
     return (
-        <SoldItemContext.Provider value={{ soldItems, getSoldItems, getSingleSoldItem, singleSoldItem, editSoldItem }} >
+        <SoldItemContext.Provider value={{ soldItems, getSoldItems, getSingleSoldItem, singleSoldItem, editSoldItem, soldItemsByMonth, getSoldItemsByMonth }} >
             { props.children }
         </SoldItemContext.Provider>
     )

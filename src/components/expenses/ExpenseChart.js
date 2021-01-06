@@ -1,46 +1,34 @@
 import React, { useContext, useEffect, useState, useMemo } from "react"
 import { ExpenseContext } from "./ExpenseProvider.js"
 import { Pie, Bar } from "react-chartjs-2";
+import "./Expenses.css";
 
-export const ExpenseSupplyTypeChart = (props) => {
+export const ExpenseChart = (props) => {
     const { supplyTypeExpenses, getExpensesBySupplyType } = useContext(ExpenseContext)
+    const { monthExpenses, getExpensesByMonth } = useContext(ExpenseContext)
 
     useEffect(() => {
         getExpensesBySupplyType()
+        getExpensesByMonth()
     }, [])
 
-    const labels = supplyTypeExpenses.map(ste => {
+    const supplytypelabels = supplyTypeExpenses.map(ste => {
         return ste.name
     })
 
-    const data = supplyTypeExpenses.map(ste => {
+    const supplytypedata = supplyTypeExpenses.map(ste => {
         return ste.expense
     })
     const piedata = {
-        labels: labels,
+        labels: supplytypelabels,
         datasets: [{
             label: "Supply Types",
-            data: data,
+            data: supplytypedata,
             backgroundColor: ["rgb(63, 191, 191)", "rgb(63, 63, 191)"]
         }]
     }
 
-    return (
-        <div>
-            <h3>Expenses By Supply Type</h3>
-            <Pie data={piedata} />
-        </div>
-    )
-}
-
-export const ExpenseMonthChart = (props) => {
-    const { monthExpenses, getExpensesByMonth } = useContext(ExpenseContext)
-
-    useEffect(() => {
-        getExpensesByMonth()
-    }, [])
-
-    const labels = monthExpenses.map(me => {
+    const monthlabels = monthExpenses.map(me => {
         const months = [ "January", "February", "March", "April", "May", "June", 
         "July", "August", "September", "October", "November", "December" ];
 
@@ -48,23 +36,28 @@ export const ExpenseMonthChart = (props) => {
         return selectedMonthName
     })
 
-    const data = monthExpenses.map(me => {
-        return me.totalexpense
+    const monthdata = monthExpenses.map(me => {
+        return me.totalexpense.toFixed(2)
     })
 
 
     const bardata = {
-        labels: labels,
+        labels: monthlabels,
         datasets: [{
             label: "Total Expenses",
-            data: data,
+            data: monthdata,
             backgroundColor: "rgb(63, 191, 191)"
         }],
     }
 
     return (
-        <div>
-            <h3>Expenses By Month</h3>
+    <div className="expensechart">
+        <div className="chart__div_expense chart__div_expense_pie">
+            <h4 className="chart__title">Expenses By Supply Type</h4>
+            <Pie data={piedata} />
+        </div>
+        <div className="chart__div_expense chart__div_expense_bar">
+            <h4 className="chart__title">Expenses By Month</h4>
             <Bar
                 data={bardata}
                 options={{
@@ -78,5 +71,6 @@ export const ExpenseMonthChart = (props) => {
                 }}
             />
         </div>
+    </div>
     )
 }

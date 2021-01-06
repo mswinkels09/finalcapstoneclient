@@ -47,8 +47,8 @@ export const ItemForm = props => {
     }
 
     const constructNewItem = () => {
-        debugger
         if (itemPathId) {
+            debugger
             editListedItem({
                 id: item.id,
                 title: item.title,
@@ -83,85 +83,99 @@ export const ItemForm = props => {
 
     return(
         <>
-        <h2>Add New Item</h2>
-        <Form>
-            <FormGroup>
-                <Input type="text" name="title" id="title" placeholder="Enter Item's Name" 
-                    value={item.title}
-                    onChange={handleControlledInputChange}/>
-            </FormGroup>
-            <FormGroup>
-                <select name="listing_type_id" id="listing_type" value={item.listing_type_id}
-                    onChange={handleControlledInputChange}>
-                    <option value="">Select Listing Type</option>
-                    {listingTypes.map(lt => (
-                        <option key={lt.id} value={lt.id}>
-                            {lt.name}
-                        </option>
-                    ))}
-                </select>
-            </FormGroup>
-            <FormGroup>
-                <select name="category_id" id="category" value={item.category_id}
-                    onChange={handleControlledInputChange}>
-                    <option value="">Select Item Category</option>
-                    {categories.map(c => (
-                        <option key={c.id} value={c.id}>
-                            {c.name}
-                        </option>
-                    ))}
-                </select>
-            </FormGroup>
-            <FormGroup>
-                <Input type="number" name="unique_item_id" id="unique_item_id" placeholder="Enter Item's Unique ID (If Applicable)" 
-                    value={item.unique_item_id}
-                    onChange={handleControlledInputChange}/>
-            </FormGroup>
-            <FormGroup>
-                <Input type="date" name="date_listed" id="date_listed" placeholder="Select Date Item Was Listed" 
-                    value={item.date_listed}
-                    onChange={handleControlledInputChange}/>
-            </FormGroup>
-            <FormGroup>
-                <Input type="number" name="item_weight" id="item_weight" placeholder="Enter Item's Weight" 
-                    value={item.item_weight}
-                    onChange={handleControlledInputChange }/>
-            </FormGroup>
-            <FormGroup>
-                <select name="weight_type_id" id="weight_type" value={item.weight_type_id}
-                    onChange={handleControlledInputChange}>
-                    <option value="">Select Weight Type</option>
-                    {weightTypes.map(wt => (
-                        <option key={wt.id} value={wt.id}>
-                            {wt.type}
-                        </option>
-                    ))}
-                </select>
-            </FormGroup>
-            <FormGroup>
-                <Input type="number" name="item_cost" id="item_cost" placeholder="Enter Item's Cost" 
-                    value={calculateItemCost(item)}
-                    onChange={handleControlledInputChange}/>
-            </FormGroup>
-            <FormGroup>
-                <Input type="number" name="listing_fee" id="listing_fee" placeholder="Enter Item's Listing Fee (If Applicable)" 
-                    value={item.listing_fee}
-                    onChange={handleControlledInputChange }/>
-            </FormGroup>
-            <FormGroup>
-                <Input type="textarea" name="notes" id="notes" placeholder="Item Notes" 
-                    value={item.notes}
-                    onChange={handleControlledInputChange }/>
-            </FormGroup>
-        </Form>
-        <button
-            onClick={evt => {
-                evt.preventDefault() 
-                constructNewItem()
-            }}
-                className="btn btn-primary">
-                    {itemPathId ?"Save" :"Submit"}
-        </button>
+        <div className="listedform">
+            <div className="form__main">
+                <Form className="form__div_items">
+                    <div className="center_item_title_form_listed">
+                        <h2 className="form__title">{itemPathId ?"Edit Item" :"Add New Item"}</h2>
+                    </div>
+                    <div className="form__item_top">
+                        <FormGroup className="form__detail_listed">
+                            <Input type="text" name="title" id="title" placeholder="Enter Item's Name" 
+                                value={item.title}
+                                onChange={handleControlledInputChange}/>
+                        </FormGroup>
+                        <FormGroup className="form__detail_listed">
+                            <Input type="number" name="unique_item_id" id="unique_item_id" placeholder="Enter Item's Unique ID (If Applicable)" 
+                                value={item.unique_item_id}
+                                onChange={handleControlledInputChange}/>
+                        </FormGroup>
+                        <FormGroup className="form__detail_listed form__detail_select">
+                            <select name="listing_type_id" id="listing_type" value={item.listing_type_id}
+                                onChange={handleControlledInputChange}>
+                                <option value="">Select Listing Type</option>
+                                {listingTypes.map(lt => (
+                                    <option key={lt.id} value={lt.id}>
+                                        {lt.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </FormGroup>
+                        <FormGroup className="form__detail_listed form__detail_select">
+                            <select name="category_id" id="category" value={item.category_id}
+                                onChange={handleControlledInputChange}>
+                                <option value="">Select Item Category</option>
+                                {categories.map(c => (
+                                    <option key={c.id} value={c.id}>
+                                        {c.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </FormGroup>
+                        <FormGroup className="form__detail_listed">
+                            <Input type="date" name="date_listed" id="date_listed" placeholder="Select Date Item Was Listed" 
+                                value={item.date_listed}
+                                onChange={handleControlledInputChange}/>
+                        </FormGroup>
+                    </div>
+                    <div className="form__item_weight">
+                        <FormGroup className="form__detail_listed form__weight_input">
+                            <Input type="number" name="item_weight" id="item_weight" placeholder="Enter Item's Weight" 
+                                value={item.item_weight}
+                                onChange={handleControlledInputChange }/>
+                        </FormGroup>
+                        <FormGroup className="form__detail_listed form__weight_select">
+                            <select name="weight_type_id" id="weight_type" value={item.weight_type_id}
+                                onChange={handleControlledInputChange}>
+                                <option value="">Select Weight Type</option>
+                                {weightTypes.map(wt => (
+                                    <option key={wt.id} value={wt.id}>
+                                        {wt.type}
+                                    </option>
+                                ))}
+                            </select>
+                        </FormGroup>
+                    </div>
+                    <div className="form__item_bottom">
+                        <FormGroup className="form__detail_listed">
+                            <Input type="number" name="item_cost" id="item_cost" placeholder="Enter Item's Cost" 
+                                value={calculateItemCost(item)}
+                                onChange={handleControlledInputChange}/>
+                        </FormGroup>
+                        <FormGroup className="form__detail_listed">
+                            <Input type="number" name="listing_fee" id="listing_fee" placeholder="Enter Item's Listing Fee (If Applicable)" 
+                                value={item.listing_fee}
+                                onChange={handleControlledInputChange }/>
+                        </FormGroup>
+                    </div>
+                    <FormGroup className="form__detail_listed">
+                        <Input type="textarea" name="notes" id="notes" placeholder="Item Notes" 
+                            value={item.notes}
+                            onChange={handleControlledInputChange }/>
+                    </FormGroup>
+                    <div className="form__buttons">
+                        <button
+                            onClick={evt => {
+                                evt.preventDefault() 
+                                constructNewItem()
+                            }}
+                                className="btn btn-primary">
+                                    {itemPathId ?"Save" :"Submit"}
+                        </button>
+                    </div>
+                </Form>
+            </div>
+        </div>
         </>
     )
 }

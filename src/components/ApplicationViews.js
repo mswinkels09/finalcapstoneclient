@@ -12,35 +12,47 @@ import { ExpenseProvider } from "./expenses/ExpenseProvider";
 import { ExpenseDetails } from "./expenses/ExpenseDetail";
 import { ListedItemDetails } from "./listedItems/ListedItemDetail";
 import { SoldItemDetails } from "./soldItems/SoldItemDetail";
-import { ExpenseSupplyTypeChart, ExpenseMonthChart } from "./expenses/ExpenseChart";
 import { ProfitProvider } from "./profit/ProfitProvider";
-import { ProfitListingTypeChart, ProfitCategoriesChart, ProfitMonthChart, ProfitYearChart } from "./profit/ProfitChart";
+import { ProfitChart } from "./profit/ProfitChart";
+import { SoldItemForm } from "./soldItems/SoldItemForm";
+import { DashboardChart } from "./dashboard/Dashboard";
 
 export const ApplicationViews = (props) => {
     return <>
         <ProfitProvider>
+            <ExpenseProvider>
+                <SoldItemProvider>
+                    <ListedItemProvider>
+                        <Route exact path="/">
+                            <DashboardChart {...props} />
+                        </Route>
+                    </ListedItemProvider>
+                </SoldItemProvider>
+            </ExpenseProvider>
+        </ProfitProvider>
+
+        <ProfitProvider>
             <Route exact path="/profit">
-                <ProfitListingTypeChart {...props} />
-                <ProfitCategoriesChart {...props} />
-                <ProfitMonthChart {...props} />
-                <ProfitYearChart {...props} />
+                <ProfitChart {...props} />
             </Route>
         </ProfitProvider>
         <ListedItemProvider>
-            <TypesProvider>
-                <Route exact path="/listeditems">
-                    <ListedItemList {...props} />
-                </Route>
-                <Route exact path="/newitem">
-                    <ItemForm {...props} />
-                </Route>
-                <Route exact path="/listeditems/:listedItemId(\d+)">
-                    <ListedItemDetails {...props} />
-                </Route>
-                <Route exact path="/listeditems/:listedItemId(\d+)/edit">
-                    <ItemForm {...props} />
-                </Route>
-            </TypesProvider>
+            <SoldItemProvider>
+                <TypesProvider>
+                    <Route exact path="/listeditems">
+                        <ListedItemList {...props} />
+                    </Route>
+                    <Route exact path="/newitem">
+                        <ItemForm {...props} />
+                    </Route>
+                    <Route exact path="/listeditems/:listedItemId(\d+)">
+                        <ListedItemDetails {...props} />
+                    </Route>
+                    <Route exact path="/listeditems/:listedItemId(\d+)/edit">
+                        <ItemForm {...props} />
+                    </Route>
+                </TypesProvider>
+            </SoldItemProvider>
         </ListedItemProvider>
         <SoldItemProvider>
             <Route exact path="/solditems">
@@ -49,12 +61,13 @@ export const ApplicationViews = (props) => {
             <Route exact path="/solditems/:soldItemId(\d+)">
                     <SoldItemDetails {...props} />
             </Route>
+            <Route exact path="/solditems/:soldItemId(\d+)/edit">
+                    <SoldItemForm {...props} />
+            </Route>
         </SoldItemProvider>
         <ExpenseProvider>
             <TypesProvider>
                 <Route exact path="/expenses">
-                    <ExpenseSupplyTypeChart {...props} />
-                    <ExpenseMonthChart {...props} />
                     <ExpenseList {...props} />
                 </Route>
                 <Route exact path="/addexpense">

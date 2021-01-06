@@ -11,6 +11,13 @@ export const NavBar = (props) => {
                 <div className="navbar__item_main">
                     <button className="nav-button "
                             onClick={() => {
+                                props.history.push({ pathname: "/" })
+                            }}
+                        >Dashboard</button>
+                </div>
+                <div className="navbar__item_main">
+                    <button className="nav-button "
+                            onClick={() => {
                                 props.history.push({ pathname: "/profit" })
                             }}
                         >Sales/Profit</button>

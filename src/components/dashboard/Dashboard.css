@@ -1,0 +1,25 @@
+.dashboard__main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.number_lists {
+    border: 3px black solid;
+    padding: 8px;
+    padding-right: 30px;
+}
+
+.chart__main_dashboard {
+    width: 700px;
+}
+
+.chart__div_dashboard {
+    padding-top: 1rem;
+    width: 700px;
+}
+
+.chart__title {
+    text-align: center;
+}
