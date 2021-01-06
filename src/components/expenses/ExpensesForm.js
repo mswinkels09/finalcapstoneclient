@@ -17,7 +17,9 @@ export const ExpenseForm = props => {
     }, [])
     
     useEffect(() => {
-        getExpenseInEditMode()
+        if(expensePathId){
+            getExpenseInEditMode()
+        }
     }, {expensePathId})
 
     const handleControlledInputChange = (event) => {
@@ -28,7 +30,14 @@ export const ExpenseForm = props => {
 
     const getExpenseInEditMode = () => {
             const selectedExpense = expenses.find(expense => expense.id === expensePathId) || {}
-            setExpense(selectedExpense)
+            const selectedExpenseUnnested = {
+                id: selectedExpense.id,
+                supply_type_id: parseInt(selectedExpense.supply_type.id),
+                date_purchased: selectedExpense.date_purchased,
+                cost: selectedExpense.cost,
+                image: ""
+            }
+            setExpense(selectedExpenseUnnested)
     }
 
     const constructNewExpense = () => {

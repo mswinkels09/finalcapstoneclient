@@ -12,6 +12,7 @@ export const DashboardChart = (props) => {
     const { soldItemsByMonth, getSoldItemsByMonth, soldItems, getSoldItems } = useContext(SoldItemContext)
     const {listedItems, getListedItems} = useContext(ListedItemContext)
 
+    
     const [sortedSoldItem, setSortedSoldItem] = useState([])
 
     useEffect(() => {
@@ -28,16 +29,16 @@ export const DashboardChart = (props) => {
             var dateB = new Date(b.sold_date);
             return dateB - dateA;})
             setSortedSoldItem(sortedSoldItemsArray[0])
-    }, [soldItems])
+    }, [])
 
 
-    // const soldDate = sortedSoldItem.sold_date
-    // const todaysDate = new Date().toISOString().slice(0,10)
+    const soldDate = sortedSoldItem.sold_date
+    const todaysDate = new Date().toISOString().slice(0,10)
 
-    // const numberOfDays = soldDate - todaysDate
+    const numberOfDays = soldDate - todaysDate
 
 
-    // console.log(soldDate)
+    console.log(soldDate)
 
 
     const numberOfListedItems = listedItems.length

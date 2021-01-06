@@ -157,3 +157,11 @@
     display: flex;
     justify-content: center;
 }
+
+.success{
+    background-color: #55AE3A;
+    color:white;
+    border-radius: 5px;
+    height: 40px;
+    border: none;
+}

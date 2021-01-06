@@ -4,7 +4,7 @@ import {  Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "./SoldItems.css"
 
 export const SoldItemForm = (props) => {
-    const { singleSoldItem, getSingleSoldItem, editSoldItem } = useContext(SoldItemContext)
+    const { singleSoldItem, getSingleSoldItem, editSoldItem, soldItems } = useContext(SoldItemContext)
     const [item, setItem] = useState({})
 
     const soldItemId = parseInt(window.location.pathname.split('/')[2])
@@ -18,7 +18,7 @@ export const SoldItemForm = (props) => {
     }, {soldItemId})
 
     const getItemInEditMode = () => {
-        const selectedItem = singleSoldItem.id === soldItemId || {}
+        const selectedItem = soldItems.find(item => item.id === soldItemId) || {}
         setItem(selectedItem)
     }
 
@@ -29,9 +29,8 @@ export const SoldItemForm = (props) => {
     }
 
     const updateSoldItem = () => {
-        debugger
         editSoldItem({
-            id: singleSoldItem.id,
+            id: item.id,
             item_paid: parseFloat(item.item_paid),
             shipping_cost: parseFloat(item.shipping_cost),
             shipping_paid: parseFloat(item.shipping_paid),
@@ -140,7 +139,7 @@ export const SoldItemForm = (props) => {
                 <Button color="success"
                     onClick={evt => {
                         evt.preventDefault()
-                        updateSoldItem(singleSoldItem.id)
+                        updateSoldItem()
                     }}
                         className="btn btn-primary">
                             Save

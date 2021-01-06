@@ -10,19 +10,12 @@ export const ListedItemList = (props) => {
     const { listedItems, getListedItems } = useContext(ListedItemContext)
     const { editSoldItem } = useContext(SoldItemContext)
 
-    const [currentSort, setCurrentSort] = useState(('default'))
+    const [currentSort, setCurrentSort] = useState('default')
     const [item, setItem] = useState({})
-
-    // const soldItemId = parseInt(item)
-
 
     useEffect(() => {
         getListedItems()
     }, [])
-
-    // useEffect(() => {
-    //     findItemId()
-    // }, {soldItemId})
 
     const sortTypes = {
         up: {
@@ -60,18 +53,17 @@ export const ListedItemList = (props) => {
     }
 
     const editListedItemToSold = (obj) => {
-        debugger
-            editSoldItem({
-                id: obj,
-                item_paid: parseFloat(item.item_paid),
-                shipping_cost: parseFloat(item.shipping_cost),
-                shipping_paid: parseFloat(item.shipping_paid),
-                final_value_fee: parseFloat(item.final_value_fee),
-                sold_date: item.sold_date,
-                returned: false,
-                notes: item.notes
-            })
-                .then(() => props.history.push("/soldItems"))
+        editSoldItem({
+            id: obj,
+            item_paid: parseFloat(item.item_paid),
+            shipping_cost: parseFloat(item.shipping_cost),
+            shipping_paid: parseFloat(item.shipping_paid),
+            final_value_fee: parseFloat(item.final_value_fee),
+            sold_date: item.sold_date,
+            returned: false,
+            notes: item.notes
+        })
+            .then(() => props.history.push("/soldItems"))
     }
 
     return (
@@ -110,11 +102,11 @@ export const ListedItemList = (props) => {
                                     <td>{li.daysListed}</td>
                                     <td>
                                         <Popup
-                                            trigger={<Button color="success"id={li.id}>Sold?</Button>}
+                                            trigger={<button className="success" id={li.id}>Sold?</button>}
                                             modal>
                                             {close => (
                                                 <div>
-                                                    <button className="close" onClick={close}>&times;</button>
+                                                    <button className="close" onClick={() => { }}>&times;</button>
                                                     <div className="header">
                                                         <div className="popup__header"><strong>Item Sold Form</strong></div>
                                                         <div className="popup__header">{li.title}</div>
@@ -150,16 +142,14 @@ export const ListedItemList = (props) => {
                                                                 value={item.notes}
                                                                 onChange={handleControlledInputChange} />
                                                         </FormGroup>
-                                                        
                                                     </Form>
                                                     <Button color="success"
                                                         onClick={evt => {
-                                                            evt.preventDefault()
                                                             editListedItemToSold(li.id)
                                                             // findItemId(li.id)
                                                         }}
-                                                            className="btn btn-primary">
-                                                                Save
+                                                        className="btn btn-primary">
+                                                        Save
                                                     </Button>
                                                 </div>
 
