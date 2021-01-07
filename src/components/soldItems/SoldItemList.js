@@ -1,40 +1,73 @@
 import React, { useContext, useEffect, useState } from "react"
 import { SoldItemContext } from "./SoldItemProvider.js"
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 import { Link } from "react-router-dom"
 import "./SoldItems.css"
+import sort from "../images/sort.png";
 
 export const SoldItemList = (props) => {
     const { soldItems, getSoldItems } = useContext(SoldItemContext)
 
-    const[currentSort, setCurrentSort] = useState(('default'))
+    const [data, setData] = useState(soldItems);
+    const [toggle, setToggle] = useState(false)
 
     useEffect(() => {
         getSoldItems()
     }, [])
 
-    const sortTypes = {
-        up: {
-            class: 'sort-up',
-            fn: (a, b) => a.profit_per_item - b.profit_per_item || a.sold_date - b.sold_date
-        },
-        down: {
-            class: 'sort-down',
-            fn: (a, b) => b.profit_per_item - a.profit_per_item || b.sold_date - a.sold_date
-        },
-        default: {
-            class: 'sort',
-            fn: (a, b) => a
-        }
+    const sortProfit = () => {
+        const sortedData = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return a.profit_per_item - b.profit_per_item
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return b.profit_per_item - a.profit_per_item
+            }
+        })
+        setData(sortedData);
+    };
+    const sortItemPaid = () => {
+        const sortedData = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return a.item_paid - b.item_paid
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return b.item_paid - a.item_paid
+            }
+        })
+        setData(sortedData);
     };
 
-    const onSortChange = () => {
-        if (currentSort === 'down')
-            setCurrentSort('up');
-        else if (currentSort === 'up') 
-            setCurrentSort('default');
-        else if (currentSort === 'default') 
-            setCurrentSort('down');
+    const sortItemCost = () => {
+        const sortedData = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return a.item_cost - b.item_cost
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return b.item_cost - a.item_cost
+            }
+        })
+        setData(sortedData);
+    };
+
+    const sortDate = () => {
+        const sortedData = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return new Date(a.sold_date) - new Date(b.sold_date)
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return new Date(b.sold_date) - new Date(a.sold_date)
+            }
+        })
+        setData(sortedData);
     };
 
     return (
@@ -46,27 +79,45 @@ export const SoldItemList = (props) => {
                         <tr>
                             <th>Item Name</th>
                             <th>
-                                Sold Date
-                                <button onClick={onSortChange}>
-                                    <i className={`fas fa-${sortTypes[currentSort].class}`} />
-                                </button>
+                                <div className="table__sort">
+                                    Sold Date
+                                    <Button id="sorting__button" color="outline-success" onClick={() => sortDate()}>
+                                        <img className="table__image" src={sort} width={25} height={25} />
+                                    </Button>
+                                </div>
                             </th>
                             <th>Category</th>
-                            <th>Item Cost</th>
+                            <th>
+                                <div className="table__sort">
+                                    Item Cost
+                                    <Button id="sorting__button" color="outline-success" onClick={() => sortItemCost()}>
+                                        <img className="table__image" src={sort} width={25} height={25} />
+                                    </Button>
+                                </div>
+                            </th>
                             <th>Shipping Cost</th>
-                            <th>Item Paid</th>
+                            <th>
+                                <div className="table__sort">
+                                    Item Paid
+                                    <Button id="sorting__button" color="outline-success" onClick={() => sortItemPaid()}>
+                                        <img className="table__image" src={sort} width={25} height={25} />
+                                    </Button>
+                                </div>
+                            </th>
                             <th>Shipping Paid</th>
                             <th>
-                                Total Profit
-                                <button onClick={onSortChange}>
-                                    <i className={`fas fa-${sortTypes[currentSort].class}`} />
-                                </button>
+                                <div className="table__sort">
+                                    Total Profit
+                                    <Button id="sorting__button" color="outline-success" onClick={() => sortProfit()}>
+                                        <img className="table__image" src={sort} width={25} height={25} />
+                                    </Button>
+                                </div>
                             </th>
                             <th>Percentage Of Profit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {soldItems.sort(sortTypes[currentSort].fn).map(si => {
+                        {data.map(si => {
                             return(
                                 <tr>
                                     <td><Link to={{pathname:`/solditems/${si.id}`}}>{si.title}</Link></td>

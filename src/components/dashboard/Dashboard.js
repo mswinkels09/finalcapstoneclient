@@ -32,14 +32,20 @@ export const DashboardChart = (props) => {
     }, [])
 
 
-    const soldDate = sortedSoldItem.sold_date
-    const todaysDate = new Date().toISOString().slice(0,10)
+    // const soldDate = sortedSoldItem.sold_date
+    // const todaysDate = new Date().toISOString().slice(0,10)
 
-    const numberOfDays = soldDate - todaysDate
+    // const numberOfDays = soldDate - todaysDate
 
 
-    console.log(soldDate)
+    // console.log(soldDate)
+    // let profitTotal = 0
 
+    // const profitarray = profitMonth.slice()
+    // const totalProfit = profitarray.map(pa => pa.profit)
+    // const totalProfitForCurrentYear = 
+    //     profitTotal += totalProfit.profit
+    // console.log(totalProfitForCurrentYear)
 
     const numberOfListedItems = listedItems.length
     const numberOfSoldItems = soldItems.length
@@ -104,7 +110,6 @@ export const DashboardChart = (props) => {
     return (
         <div className="dashboard__main">
             <div className="dashboard__left">
-
                 <div className="number_lists">
                     <h5 className="number_list">TOTAL NUMBER OF ITEMS: {totalNumberOfItems}</h5>
                     <h5 className="number_list">TOTAL NUMBER OF LISTED ITEMS: {numberOfListedItems}</h5>

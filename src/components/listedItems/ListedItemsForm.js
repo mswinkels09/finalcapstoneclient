@@ -25,10 +25,11 @@ export const ItemForm = props => {
         if(itemPathId){
             getItemInEditMode()
         }
-    }, {itemPathId})
+    }, [itemPathId])
 
     useEffect(() => {
         console.log(item)
+        console.log(item.date_listed)
     }, [item])
 
     const calculateItemCost = (item) => {

@@ -107,7 +107,8 @@
 .detail__main_title_listed{
     display: flex;
     justify-content: center;
-    font-size: 40px;
+    font-size: 6vw;
+    font-weight: bold;
     border: 3px black solid;
     width: 450px;
     height: 100px;
@@ -165,3 +166,21 @@
     height: 40px;
     border: none;
 }
+
+#sorting__button{
+    width: 30px;
+    height:30px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.table__sort{
+    display: flex;
+    justify-content: space-between;
+}
+
+.table__image{
+    padding-bottom: 3px;
+}
+

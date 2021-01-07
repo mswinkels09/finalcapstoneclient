@@ -19,17 +19,17 @@
 }
 
 .detail__sold_title{
-    font-size:40px;
+    font-size: calc(8vw+8vh + 2vmax);
     font-weight: bold;
 }
 
 .detail__sold_id{
-    font-size:18px;
+    font-size:3vw;
     font-style: italic;
 }
 
 .detail__sold_date{
-    font-size: 20px;
+    font-size: 2vh;
     font-weight: bold;
     padding-bottom: 10px;;
 }
