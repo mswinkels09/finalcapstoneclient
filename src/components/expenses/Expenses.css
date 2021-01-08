@@ -14,7 +14,7 @@
 .chart__div_expense {
     padding: 0.5rem;
     width: 500px;
-    border: 3px black solid;
+    border: 6px #555652 solid;
 }
 
 .chart__div_expense_pie{
@@ -29,7 +29,7 @@
 
 .table__main_expense{
     width: 1200px;
-    border: 3px black solid;
+    border: 6px #555652 solid;
     padding: 2rem;
     margin-left: 4%;
     overflow-y: auto;
@@ -110,7 +110,7 @@
 }
 
 .form__div{
-    border: 3px solid black;
+    border: 6px #555652 solid;
     padding-left: 6rem;
     padding-right: 6rem;
     margin: 2rem;
@@ -138,4 +138,15 @@
 
 .form__title{
     text-align: center;
+}
+
+.table__button{
+    border: 3px #555652 solid !important;
+}
+
+.form__expense_button{
+    width: 200px;
+    height: 60px;
+    font-size: 30px !important;
+    margin-bottom: 10px !important;
 }

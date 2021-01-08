@@ -97,7 +97,7 @@ export const ExpenseForm = props => {
                                 evt.preventDefault() 
                                 constructNewExpense()
                             }}
-                                className="btn btn-primary">
+                                className="form__expense_button table__button">
                                     {expensePathId ?"Save" :"Submit"}
                         </Button>
                     </div>

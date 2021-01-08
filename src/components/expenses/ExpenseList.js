@@ -14,6 +14,9 @@ export const ExpenseList = (props) => {
     useEffect(() => {
         getExpenses()
     }, [])
+    useEffect(() => {
+        setData(expenses)
+    }, [expenses])
 
 
 
@@ -83,10 +86,10 @@ export const ExpenseList = (props) => {
                         {data.map(e => {
                                 return(
                                     <tr>
-                                        <td>{e.date_purchased}</td>
+                                        <td>{e.dateExpenseConverted}</td>
                                         <td>{e.supply_type.name}</td>
                                         <td>${e.cost.toFixed(2)}</td>
-                                        <td><Button color="success" type="button" onClick={() => props.history.push(`/expenses/${e.id}`)}>View</Button></td>
+                                        <td><Button className="table__button" color="success" type="button" onClick={() => props.history.push(`/expenses/${e.id}`)}>View</Button></td>
                                     </tr>
                                 )
                             })}

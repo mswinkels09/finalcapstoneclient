@@ -8,12 +8,18 @@ import sort from "../images/sort.png";
 export const SoldItemList = (props) => {
     const { soldItems, getSoldItems } = useContext(SoldItemContext)
 
-    const [data, setData] = useState(soldItems);
+    const [data, setData] = useState([]);
     const [toggle, setToggle] = useState(false)
 
     useEffect(() => {
         getSoldItems()
     }, [])
+
+    useEffect(() => {
+        setData(soldItems)
+    }, [soldItems])
+
+
 
     const sortProfit = () => {
         const sortedData = data.slice().sort((a, b) => {
@@ -28,6 +34,21 @@ export const SoldItemList = (props) => {
         })
         setData(sortedData);
     };
+
+    const sortProfitPercentage = () => {
+        const sortedData = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return a.profit_per_item_percentage - b.profit_per_item_percentage
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return b.profit_per_item_percentage - a.profit_per_item_percentage
+            }
+        })
+        setData(sortedData);
+    };
+
     const sortItemPaid = () => {
         const sortedData = data.slice().sort((a, b) => {
             if(toggle === false){
@@ -60,11 +81,11 @@ export const SoldItemList = (props) => {
         const sortedData = data.slice().sort((a, b) => {
             if(toggle === false){
                 setToggle(true)
-                return new Date(a.sold_date) - new Date(b.sold_date)
+                return new Date(a.dateSoldConverted) - new Date(b.dateSoldConverted)
             }
             else if(toggle === true){
                 setToggle(false)
-                return new Date(b.sold_date) - new Date(a.sold_date)
+                return new Date(b.dateSoldConverted) - new Date(a.dateSoldConverted)
             }
         })
         setData(sortedData);
@@ -74,7 +95,7 @@ export const SoldItemList = (props) => {
         <div className="sold_items__main">
             <div className="table__main_sold_items table__main">
                 <div className="table__title">SOLD ITEMS</div>
-                <Table bordered responsive className="table__div">
+                <Table striped bordered responsive className="table__div">
                     <thead>
                         <tr>
                             <th>Item Name</th>
@@ -113,7 +134,14 @@ export const SoldItemList = (props) => {
                                     </Button>
                                 </div>
                             </th>
-                            <th>Percentage Of Profit</th>
+                            <th>
+                                <div className="table__sort">
+                                    Percentage Of Profit
+                                    <Button id="sorting__button" color="outline-success" onClick={() => sortProfitPercentage()}>
+                                        <img className="table__image" src={sort} width={25} height={25} />
+                                    </Button>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,7 +149,7 @@ export const SoldItemList = (props) => {
                             return(
                                 <tr>
                                     <td><Link to={{pathname:`/solditems/${si.id}`}}>{si.title}</Link></td>
-                                    <td>{si.sold_date}</td>
+                                    <td>{si.dateSoldConverted}</td>
                                     <td>{si.category.name}</td>
                                     <td>${si.item_cost.toFixed(2)}</td>
                                     <td>${si.shipping_cost.toFixed(2)}</td>

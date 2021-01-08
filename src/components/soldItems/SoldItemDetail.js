@@ -21,7 +21,7 @@ export const SoldItemDetails = (props) => {
                     <div className="detail__sold_title">{singleSoldItem.title}</div>
                     <div className="detail__sold_id">#{singleSoldItem.unique_item_id}</div>
                 </div>
-                <div className="detail__sold_date">Sold: {singleSoldItem.sold_date}</div>
+                <div className="detail__sold_date">Sold: {singleSoldItem.dateSoldConverted}</div>
             </div>
         </div>
         <div className="row__details top_row_sold__details">

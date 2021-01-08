@@ -20,9 +20,8 @@ export const ListedItemList = (props) => {
     }, [])
     
     useEffect(() => {
-        console.log(data, "data")
-        
-    }, [data])
+        setData(listedItems)
+    }, [listedItems])
 
     const sortDaysListed = () => {
         const sortedDataCost = data.slice().sort((a, b) => {
@@ -116,14 +115,13 @@ export const ListedItemList = (props) => {
                                     <td>{li.daysListed}</td>
                                     <td>
                                         <Popup
-                                            trigger={<button className="success" id={li.id}>Sold?</button>}
+                                            trigger={<button className="success table__button" id={li.id}>Sold?</button>}
                                             modal>
                                             {close => (
                                                 <div>
-                                                    <button className="close" onClick={() => { }}>&times;</button>
                                                     <div className="header">
                                                         <div className="popup__header"><strong>Item Sold Form</strong></div>
-                                                        <div className="popup__header">{li.title}</div>
+                                                        <div className="popup__header_title">{li.title}</div>
                                                     </div>
                                                     <Form className="content">
                                                         <FormGroup>
@@ -157,14 +155,16 @@ export const ListedItemList = (props) => {
                                                                 onChange={handleControlledInputChange} />
                                                         </FormGroup>
                                                     </Form>
-                                                    <Button color="success"
-                                                        onClick={evt => {
-                                                            editListedItemToSold(li.id)
-                                                            // findItemId(li.id)
-                                                        }}
-                                                        className="btn btn-primary">
-                                                        Save
-                                                    </Button>
+                                                    <div className="form__button_listed_sold">
+                                                        <Button color="success"
+                                                            onClick={evt => {
+                                                                editListedItemToSold(li.id)
+                                                                // findItemId(li.id)
+                                                            }}
+                                                            className="btn btn-primary ">
+                                                            Save
+                                                        </Button>
+                                                    </div>
                                                 </div>
 
                                             )}

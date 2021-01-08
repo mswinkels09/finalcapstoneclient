@@ -18,11 +18,19 @@
 .popup__header {
     text-align: center;
     padding-bottom: 5px;
+    color: white;
+    margin-left: 47px;
+}
+.popup__header_title {
+    text-align: center;
+    padding-bottom: 5px;
+    color: white;
+    font-size: 30px;
 }
 
 .popup-content {
     width: 400px;
-    background-color: goldenrod;
+    background-color: #555652;
     padding: 5px;
 }
 
@@ -40,23 +48,47 @@
     border: 1px solid #cfcece;
 }
 
+.close__button{
+    color:#ffffff !important;
+    width: 50px !important;
+}
+
 .table__title {
     text-align: center;
     border: 3px black solid;
     font-size: 28px;
     font-weight: bold;
     padding: 10px;
+    color: white;
+    background-color: #555652;
 }
 
 .table__div {
     width: auto; 
+    background-color: white;
+    border: 4px #555652 solid!important; 
 }
+
+Table {
+    border: 4px #555652 solid!important; 
+}
+
+Table th{
+    border: 4px #555652 solid!important; 
+}
+Table td{
+    border: 2px #555652 solid !important; 
+}
+
 .table__main {
     width: 1200px;
-    border: 3px black solid;
+    border: 6px #555652 solid;
     padding: 2rem;
     margin-left: 4%;
     overflow-y: auto;
+    height: 670px;
+    margin: auto;
+    background-color: white;
 }
 
 .listed_items__main {
@@ -107,11 +139,11 @@
 .detail__main_title_listed{
     display: flex;
     justify-content: center;
-    font-size: 6vw;
+    font-size: 1.5vw;
     font-weight: bold;
     border: 3px black solid;
-    width: 450px;
-    height: 100px;
+    width: 700px;
+    height: 140px;
     text-align: center;
     padding-top: 10px;
     align-content: center;
@@ -129,7 +161,7 @@
 }
 
 .form__div_items{
-    border: 3px solid black;
+    border: 6px #555652 solid;
     padding-left: 6rem;
     padding-right: 6rem;
     margin: 2rem;
@@ -184,3 +216,15 @@
     padding-bottom: 3px;
 }
 
+.form__listed_button{
+    width: 160px;
+    height: 50px;
+    font-size: 25px !important;
+    margin-bottom: 10px !important;
+}
+
+.form__button_listed_sold{
+    display: flex !important;
+    justify-content: center !important;
+    margin-bottom: 7px;
+}

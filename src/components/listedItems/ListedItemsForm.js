@@ -21,11 +21,11 @@ export const ItemForm = props => {
         getWeightTypes()
     }, [])
 
-    useEffect(() => {
-        if(itemPathId){
-            getItemInEditMode()
-        }
-    }, [itemPathId])
+    // useEffect(() => {
+    //     if(itemPathId){
+    //         getItemInEditMode()
+    //     }
+    // }, [itemPathId])
 
     useEffect(() => {
         console.log(item)
@@ -188,7 +188,7 @@ export const ItemForm = props => {
                                 evt.preventDefault() 
                                 constructNewItem()
                             }}
-                                className="btn btn-primary">
+                                className="form__listed_button table__button">
                                     {itemPathId ?"Save" :"Submit"}
                         </Button>
                     </div>
