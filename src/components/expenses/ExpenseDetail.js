@@ -38,7 +38,7 @@ export const ExpenseDetails = (props) => {
         <div className="center_item_details">
             <div className="detail__div">
                 <h4 className="detail__title">Date Of Purchase</h4>
-                <div className="detail__data">{singleExpense.date_purchased}</div>
+                <div className="detail__data">{singleExpense.dateExpenseConverted}</div>
             </div>
         </div>
         <div className="center_item_details">

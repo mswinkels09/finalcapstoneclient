@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import "./Auth.css"
+import logo from "../images/logo.png"
 
 
 export const Login = props => {
@@ -42,7 +43,7 @@ export const Login = props => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Profit Tracker</h1>
+                    <h1>Profit Tracker<img src={logo} className="login__logo" /></h1>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>

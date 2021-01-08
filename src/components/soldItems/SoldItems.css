@@ -1,13 +1,14 @@
 .sold_items__main {
     padding: 2.5rem;
+    /* background-color: #7CAD1A; */
 }
 
 .detail__main_title_div{
     display: flex;
     justify-content: center;
     border: 3px black solid;
-    width: 450px;
-    height: 110px;
+    width: 700px;
+    height: 140px;
     text-align: center;
     padding: 10px;
     align-content: center;
@@ -19,17 +20,17 @@
 }
 
 .detail__sold_title{
-    font-size:40px;
+    font-size: 1.5vw;
     font-weight: bold;
 }
 
 .detail__sold_id{
-    font-size:18px;
+    font-size:20px;
     font-style: italic;
 }
 
 .detail__sold_date{
-    font-size: 20px;
+    font-size: 2vh;
     font-weight: bold;
     padding-bottom: 10px;;
 }

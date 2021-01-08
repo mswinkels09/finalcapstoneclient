@@ -5,19 +5,55 @@
     padding: 20px;
 }
 
-.number_lists {
-    border: 3px black solid;
-    padding: 8px;
-    padding-right: 30px;
+.dashboard__left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
 }
 
+.number_lists {
+    border: 6px #555652 solid;
+    padding: 8px;
+    padding-right: 30px;
+    margin-bottom: 35px;
+    font-size: 20px;
+}
+
+
+.totals__div{
+    
+    border: 6px #555652 solid;
+    padding: 8px;
+    padding-right: 30px;
+    font-size: 25px;
+    margin: 15px;
+    width: 500px;
+}
+
+.total__div{
+    display: flex;
+    flex-direction: row;
+}
+
+.total__data{
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+
 .chart__main_dashboard {
-    width: 700px;
+    width: 650px;
 }
 
 .chart__div_dashboard {
     padding-top: 1rem;
-    width: 700px;
+    width: 650px;
+    border: 6px #555652 solid;
+    margin: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
 }
 
 .chart__title {

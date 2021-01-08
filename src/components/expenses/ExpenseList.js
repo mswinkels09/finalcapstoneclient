@@ -3,42 +3,51 @@ import { ExpenseContext } from "./ExpenseProvider.js"
 import { Table, Button } from "reactstrap";
 import {ExpenseChart} from "./ExpenseChart"
 import "./Expenses.css"
+import sort from "../images/sort.png";
 
 export const ExpenseList = (props) => {
     const { expenses, getExpenses } = useContext(ExpenseContext)
 
-    const[currentSort, setCurrentSort] = useState(('default'))
+    const [data, setData] = useState(expenses);
+    const [toggle, setToggle] = useState(false)
 
     useEffect(() => {
         getExpenses()
     }, [])
+    useEffect(() => {
+        setData(expenses)
+    }, [expenses])
 
 
-    const sortTypes = {
-        up: {
-            class: 'sort-up',
-            fn: (a, b) => a.cost - b.cost || a.date_purchased - b.date_purchased
-        },
-        down: {
-            class: 'sort-down',
-            fn: (a, b) => b.cost - a.cost || b.date_purchased - a.date_purchased
-        },
-        default: {
-            class: 'sort',
-            fn: (a, b) => a
-        }
+
+    const sortCost = () => {
+        const sortedData = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return a.cost - b.cost
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return b.cost - a.cost
+            }
+        })
+        setData(sortedData);
     };
 
-
-
-    const onSortChange = () => {
-        if (currentSort === 'down')
-            setCurrentSort('up');
-        else if (currentSort === 'up') 
-            setCurrentSort('default');
-        else if (currentSort === 'default') 
-            setCurrentSort('down');
+    const sortDate = () => {
+        const sortedData = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return new Date(a.date_purchased) - new Date(b.date_purchased)
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return new Date(b.date_purchased) - new Date(a.date_purchased)
+            }
+        })
+        setData(sortedData);
     };
+
     
     return(
         <div className="expense__main">
@@ -51,30 +60,36 @@ export const ExpenseList = (props) => {
                     <Table className="table__main_expenses" bordered responsive>
                         <thead>
                             <tr>
-                                <th>
-                                    Date
-                                    <button onClick={onSortChange}>
-                                                <i className={`fas fa-${sortTypes[currentSort].class}`} />
-                                            </button>
+                                <th>                            
+                                    <div className="table__sort">
+                                        Date
+                                        <Button id="sorting__button" color="outline-success" onClick={() => sortDate()}>
+                                            <img className="table__image" src={sort} width={25} height={25} />
+                                        </Button>
+
+                                    </div>
                                 </th>
                                 <th>Supply Type</th>
                                 <th>
-                                    Amount Spent
-                                    <button onClick={onSortChange}>
-                                                <i className={`fas fa-${sortTypes[currentSort].class}`} />
-                                            </button>
+                                    <div className="table__sort">
+                                        Amount Spent
+                                        <Button id="sorting__button" color="outline-success" onClick={() => sortCost()}>
+                                            <img className="table__image" src={sort} width={25} height={25} />
+                                        </Button>
+
+                                    </div>
                                 </th>
                                 <th>View Expense</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {expenses.sort(sortTypes[currentSort].fn).map(e => {
+                        {data.map(e => {
                                 return(
                                     <tr>
-                                        <td>{e.date_purchased}</td>
+                                        <td>{e.dateExpenseConverted}</td>
                                         <td>{e.supply_type.name}</td>
                                         <td>${e.cost.toFixed(2)}</td>
-                                        <td><Button color="success" type="button" onClick={() => props.history.push(`/expenses/${e.id}`)}>View</Button></td>
+                                        <td><Button className="table__button" color="success" type="button" onClick={() => props.history.push(`/expenses/${e.id}`)}>View</Button></td>
                                     </tr>
                                 )
                             })}

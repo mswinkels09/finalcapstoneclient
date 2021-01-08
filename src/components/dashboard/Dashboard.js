@@ -12,7 +12,15 @@ export const DashboardChart = (props) => {
     const { soldItemsByMonth, getSoldItemsByMonth, soldItems, getSoldItems } = useContext(SoldItemContext)
     const {listedItems, getListedItems} = useContext(ListedItemContext)
 
+    
     const [sortedSoldItem, setSortedSoldItem] = useState([])
+    const [profitTotal, setProfitTotal] = useState([])
+    const [profitArray, setProfitArray] = useState(profitMonth)
+
+    const [expenseTotal, setExpenseTotal] = useState([])
+    const [expenseArray, setExpenseArray] = useState(monthExpenses)
+
+    const [grossProfit, setGrossProfit] = useState([])
 
     useEffect(() => {
         getProfitByMonth()
@@ -28,8 +36,37 @@ export const DashboardChart = (props) => {
             var dateB = new Date(b.sold_date);
             return dateB - dateA;})
             setSortedSoldItem(sortedSoldItemsArray[0])
-    }, [soldItems])
+    }, [])
 
+    useEffect(() => {
+        const profitarray = profitMonth.slice().map(pa => pa.profit)
+            setProfitArray(profitarray)
+    }, [profitMonth])
+
+    useEffect(() => {
+        const totalProfitObj = profitArray.reduce((a,b) => a+b, 0)
+        setProfitTotal(totalProfitObj.toFixed(2))
+    }, [profitArray])
+
+    useEffect(() => {
+        const expensearray = monthExpenses.slice().map(pa => pa.totalexpense)
+            setExpenseArray(expensearray)
+    }, [monthExpenses])
+
+    useEffect(() => {
+        const totalExpenseObj = expenseArray.reduce((a,b) => a+b, 0).toFixed(2)
+        setExpenseTotal(totalExpenseObj)
+    }, [expenseArray])
+
+    useEffect(() => {
+        const totalGrossProfit = profitTotal - expenseTotal
+        setGrossProfit(totalGrossProfit.toFixed(2))
+    }, [profitTotal, expenseTotal])
+        
+        
+    console.log(profitTotal, "profitTotal")
+    console.log(expenseTotal, "expenseTotal")
+    // console.log(grossProfit, "grossProfit")
 
     // const soldDate = sortedSoldItem.sold_date
     // const todaysDate = new Date().toISOString().slice(0,10)
@@ -38,7 +75,6 @@ export const DashboardChart = (props) => {
 
 
     // console.log(soldDate)
-
 
     const numberOfListedItems = listedItems.length
     const numberOfSoldItems = soldItems.length
@@ -103,11 +139,21 @@ export const DashboardChart = (props) => {
     return (
         <div className="dashboard__main">
             <div className="dashboard__left">
-
+                <div className="totals_div">
+                    <div className="totals__div">
+                        <div className="total__div">TOTAL PROFIT OF 2021: <div className="total__data">${profitTotal}</div></div>
+                    </div>
+                    <div className="totals__div">
+                        <div className="total__div">TOTAL EXPENSES OF 2021: <div className="total__data">${expenseTotal}</div></div>
+                    </div>
+                    <div className="totals__div">
+                        <div className="total__div">TOTAL GROSS PROFIT OF 2021: <div className="total__data">${grossProfit}</div></div>
+                    </div>
+                </div>
                 <div className="number_lists">
-                    <h5 className="number_list">TOTAL NUMBER OF ITEMS: {totalNumberOfItems}</h5>
-                    <h5 className="number_list">TOTAL NUMBER OF LISTED ITEMS: {numberOfListedItems}</h5>
-                    <h5 className="number_list">TOTAL NUMBER OF SOLD ITEMS: {numberOfSoldItems}</h5>
+                    <div className="number_list">TOTAL NUMBER OF <strong>ITEMS</strong>: {totalNumberOfItems}</div>
+                    <div className="number_list">TOTAL NUMBER OF <strong>LISTED ITEMS</strong>: {numberOfListedItems}</div>
+                    <div className="number_list">TOTAL NUMBER OF <strong>SOLD ITEMS</strong>: {numberOfSoldItems}</div>
                     <div>
                     </div>
                 </div>

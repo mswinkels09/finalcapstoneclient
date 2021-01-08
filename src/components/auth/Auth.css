@@ -42,8 +42,13 @@ fieldset {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.login__title{
+    margin-top: 20px;
+}
+
 .container--login {
     text-align: center;
+    margin-top: 50px;
 }
 
 .form--login {
@@ -56,6 +61,8 @@ fieldset {
     background-color: hsla(0,0%,100%,0.75);
     background-blend-mode: overlay;
     background-repeat: no-repeat;
+    border: 6px #555652 solid;
+    width: 700px;
 }
 
 .button--close {
@@ -66,4 +73,10 @@ fieldset {
 .dialog {
     min-width: 15rem;
     min-height: 5rem;
+}
+
+.login__logo{
+    width: 100px;
+    margin-left: 40px;
+    margin-top: 20px;
 }

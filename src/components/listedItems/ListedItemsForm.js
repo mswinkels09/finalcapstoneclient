@@ -15,16 +15,22 @@ export const ItemForm = props => {
         return parseInt(item.weight_type_id)===parseInt(wt.id)
     }) || {}
 
-    // console.log(listingTypes)
     useEffect(() => {
         getCategories()
         getListingTypes()
         getWeightTypes()
     }, [])
 
+    // useEffect(() => {
+    //     if(itemPathId){
+    //         getItemInEditMode()
+    //     }
+    // }, [itemPathId])
+
     useEffect(() => {
-        getItemInEditMode()
-    }, {itemPathId})
+        console.log(item)
+        console.log(item.date_listed)
+    }, [item])
 
     const calculateItemCost = (item) => {
         if (item.weight_type_id === "3") {
@@ -35,35 +41,48 @@ export const ItemForm = props => {
     }
 
     const getItemInEditMode = () => {
-        const selectedItem = listedItems.find(item => item.id === itemPathId) || {}
-        setItem(selectedItem)
+            const selectedItem = listedItems.find(item => item.id === itemPathId) || {}
+            const selectedItemUnnested = 
+                {
+                id: selectedItem.id,
+                title: selectedItem.title,
+                unique_item_id: selectedItem.unique_item_id,
+                item_weight: selectedItem.item_weight,
+                weight_type_id: selectedItem.weight_type.id,
+                item_cost: parseFloat(selectedItem.item_cost),
+                date_listed: selectedItem.date_listed,
+                category_id: selectedItem.category.id,
+                listing_type_id: selectedItem.listing_type.id,
+                listing_fee: parseFloat(selectedItem.listing_fee),
+                notes: selectedItem.notes
+            }
+            setItem(selectedItemUnnested)
     }
-
-
+    
+    
     const handleControlledInputChange = (event) => {
         const newItemState = Object.assign({}, item)
         newItemState[event.target.name] = event.target.value
         setItem(newItemState)
     }
-
+    
     const constructNewItem = () => {
         if (itemPathId) {
-            debugger
             editListedItem({
                 id: item.id,
                 title: item.title,
                 unique_item_id: parseInt(item.unique_item_id),
                 item_weight: parseInt(item.item_weight),
                 weight_type_id: parseInt(item.weight_type_id),
-                item_cost: item.item_cost,
+                item_cost: parseFloat(calculateItemCost(item)),
                 date_listed: item.date_listed,
                 category_id: parseInt(item.category_id),
                 listing_type_id: parseInt(item.listing_type_id),
                 listing_fee: parseFloat(item.listing_fee),
                 notes: item.notes
             })
-
-                .then(() => props.history.push("/listedItems"))
+            
+            .then(() => props.history.push("/listedItems"))
         } else {
             addItem({
                 title: item.title,
@@ -77,10 +96,10 @@ export const ItemForm = props => {
                 listing_fee: parseFloat(item.listing_fee),
                 notes: item.notes
             })
-                .then(() => props.history.push("/listedItems"))
+            .then(() => props.history.push("/listedItems"))
         }
     }
-
+    
     return(
         <>
         <div className="listedform">
@@ -117,8 +136,8 @@ export const ItemForm = props => {
                                 <option value="">Select Item Category</option>
                                 {categories.map(c => (
                                     <option key={c.id} value={c.id}>
-                                        {c.name}
-                                    </option>
+                                    {c.name}
+                                </option>
                                 ))}
                             </select>
                         </FormGroup>
@@ -169,7 +188,7 @@ export const ItemForm = props => {
                                 evt.preventDefault() 
                                 constructNewItem()
                             }}
-                                className="btn btn-primary">
+                                className="form__listed_button table__button">
                                     {itemPathId ?"Save" :"Submit"}
                         </Button>
                     </div>

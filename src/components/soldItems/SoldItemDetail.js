@@ -9,7 +9,7 @@ export const SoldItemDetails = (props) => {
     const soldItemId = parseInt(window.location.pathname.split('/')[2])
     useEffect(() => {
         getSingleSoldItem(soldItemId)
-    }, {})
+    }, [])
 
     console.log(singleSoldItem)
 
@@ -21,7 +21,7 @@ export const SoldItemDetails = (props) => {
                     <div className="detail__sold_title">{singleSoldItem.title}</div>
                     <div className="detail__sold_id">#{singleSoldItem.unique_item_id}</div>
                 </div>
-                <div className="detail__sold_date">Sold: {singleSoldItem.sold_date}</div>
+                <div className="detail__sold_date">Sold: {singleSoldItem.dateSoldConverted}</div>
             </div>
         </div>
         <div className="row__details top_row_sold__details">
@@ -96,7 +96,7 @@ export const SoldItemDetails = (props) => {
         </div>
         <div className="center_item_details">
             <div className="detail__div_notes_sold">
-                <div className="detail__data_notes">Notes:<div className="notes__details">{singleSoldItem.notes}</div></div>
+                <div className="detail__data_notes"><strong>Notes:</strong><div className="notes__details">{singleSoldItem.notes}</div></div>
             </div>
         </div>
         <div className="expense_detail__buttons center_item_details">

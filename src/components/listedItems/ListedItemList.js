@@ -1,58 +1,58 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState, useMemo } from "react"
 import { ListedItemContext } from "./ListedItemProvider.js"
 import { SoldItemContext } from "../soldItems/SoldItemProvider.js"
 import { Form, Table, FormGroup, Input, Button } from "reactstrap";
 import { Link } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import "./ListedItems.css";
+import sort from "../images/sort.png";
 
 export const ListedItemList = (props) => {
     const { listedItems, getListedItems } = useContext(ListedItemContext)
     const { editSoldItem } = useContext(SoldItemContext)
 
-    const [currentSort, setCurrentSort] = useState(('default'))
     const [item, setItem] = useState({})
-
-    // const soldItemId = parseInt(item)
-
+    const [data, setData] = useState(listedItems);
+    const [toggle, setToggle] = useState(false)
 
     useEffect(() => {
         getListedItems()
     }, [])
+    
+    useEffect(() => {
+        setData(listedItems)
+    }, [listedItems])
 
-    // useEffect(() => {
-    //     findItemId()
-    // }, {soldItemId})
-
-    const sortTypes = {
-        up: {
-            class: 'sort-up',
-            fn: (a, b) => a.item_cost - b.item_cost || a.daysListed - b.daysListed
-        },
-        down: {
-            class: 'sort-down',
-            fn: (a, b) => b.item_cost - a.item_cost || b.daysListed - a.daysListed
-        },
-        default: {
-            class: 'sort',
-            fn: (a, b) => a
-        }
+    const sortDaysListed = () => {
+        const sortedDataCost = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return a.daysListed - b.daysListed
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return b.daysListed - a.daysListed
+            }
+        })
+        setData(sortedDataCost);
     };
 
-    const onSortChange = () => {
-        if (currentSort === 'down')
-            setCurrentSort('up');
-        else if (currentSort === 'up')
-            setCurrentSort('default');
-        else if (currentSort === 'default')
-            setCurrentSort('down');
+    const sortCost = () => {
+        const sortedDataCost = data.slice().sort((a, b) => {
+            if(toggle === false){
+                setToggle(true)
+                return a.item_cost - b.item_cost
+            }
+            else if(toggle === true){
+                setToggle(false)
+                return b.item_cost - a.item_cost
+            }
+        })
+        setData(sortedDataCost);
     };
 
 
-    // const findItemId = (obj) => {
-    //     setItem(obj)
-    // }
-
+    
     const handleControlledInputChange = (event) => {
         const newItemState = Object.assign({}, item)
         newItemState[event.target.name] = event.target.value
@@ -60,18 +60,17 @@ export const ListedItemList = (props) => {
     }
 
     const editListedItemToSold = (obj) => {
-        debugger
-            editSoldItem({
-                id: obj,
-                item_paid: parseFloat(item.item_paid),
-                shipping_cost: parseFloat(item.shipping_cost),
-                shipping_paid: parseFloat(item.shipping_paid),
-                final_value_fee: parseFloat(item.final_value_fee),
-                sold_date: item.sold_date,
-                returned: false,
-                notes: item.notes
-            })
-                .then(() => props.history.push("/soldItems"))
+        editSoldItem({
+            id: obj,
+            item_paid: parseFloat(item.item_paid),
+            shipping_cost: parseFloat(item.shipping_cost),
+            shipping_paid: parseFloat(item.shipping_paid),
+            final_value_fee: parseFloat(item.final_value_fee),
+            sold_date: item.sold_date,
+            returned: false,
+            notes: item.notes
+        })
+            .then(() => props.history.push("/soldItems"))
     }
 
     return (
@@ -85,22 +84,28 @@ export const ListedItemList = (props) => {
                             <th>Type Of Listing</th>
                             <th>Category</th>
                             <th>
-                                Item Cost
-                                <button onClick={onSortChange}>
-                                    <i className={`fas fa-${sortTypes[currentSort].class}`} />
-                                </button>
+                                <div className="table__sort">
+                                    Item Cost
+                                    <Button id="sorting__button" color="outline-success" onClick={() => sortCost()}>
+                                        <img className="table__image" src={sort} width={25} height={25} />
+                                    </Button>
+
+                                </div>
                             </th>
                             <th>
-                                Days Listed
-                                <button onClick={onSortChange}>
-                                    <i className={`fas fa-${sortTypes[currentSort].class}`} />
-                                </button>
+                            <div className="table__sort">
+                                    Days Listed
+                                    <Button id="sorting__button" color="outline-success" onClick={() => sortDaysListed()}>
+                                        <img className="table__image" src={sort} width={25} height={25} />
+                                    </Button>
+
+                                </div>
                             </th>
                             <th>SOLD?</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {listedItems.sort(sortTypes[currentSort].fn).map(li => {
+                        {data.map(li => {
                             return (
                                 <tr>
                                     <td><Link to={{ pathname: `/listeditems/${li.id}` }}>{li.title}</Link></td>
@@ -110,14 +115,13 @@ export const ListedItemList = (props) => {
                                     <td>{li.daysListed}</td>
                                     <td>
                                         <Popup
-                                            trigger={<Button color="success"id={li.id}>Sold?</Button>}
+                                            trigger={<button className="success table__button" id={li.id}>Sold?</button>}
                                             modal>
                                             {close => (
                                                 <div>
-                                                    <button className="close" onClick={close}>&times;</button>
                                                     <div className="header">
                                                         <div className="popup__header"><strong>Item Sold Form</strong></div>
-                                                        <div className="popup__header">{li.title}</div>
+                                                        <div className="popup__header_title">{li.title}</div>
                                                     </div>
                                                     <Form className="content">
                                                         <FormGroup>
@@ -150,17 +154,17 @@ export const ListedItemList = (props) => {
                                                                 value={item.notes}
                                                                 onChange={handleControlledInputChange} />
                                                         </FormGroup>
-                                                        
                                                     </Form>
-                                                    <Button color="success"
-                                                        onClick={evt => {
-                                                            evt.preventDefault()
-                                                            editListedItemToSold(li.id)
-                                                            // findItemId(li.id)
-                                                        }}
-                                                            className="btn btn-primary">
-                                                                Save
-                                                    </Button>
+                                                    <div className="form__button_listed_sold">
+                                                        <Button color="success"
+                                                            onClick={evt => {
+                                                                editListedItemToSold(li.id)
+                                                                // findItemId(li.id)
+                                                            }}
+                                                            className="btn btn-primary ">
+                                                            Save
+                                                        </Button>
+                                                    </div>
                                                 </div>
 
                                             )}
