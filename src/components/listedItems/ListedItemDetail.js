@@ -12,6 +12,14 @@ export const ListedItemDetails = (props) => {
         getSingleListedItem(listedItemId)
     }, [])
 
+    const roundTo2 = (value) => {
+        if(value > 0){
+            const newValue = parseFloat(value.toFixed(2))
+            return newValue
+        }
+        else return 0
+    }
+
     const delete_prompt = (id) => {
         var retVal = window.confirm("This action will permanently delete the item. Are you sure?");
         if( retVal == true ) {
@@ -48,13 +56,13 @@ export const ListedItemDetails = (props) => {
             <div className="center_item_details">
                 <div className="detail__div_listed_bottom_row">
                     <h5 className="listed_detail__title">Item Cost:</h5>
-                    <div className="listed_detail__data">{singleListedItem.item_cost}</div>
+                    <div className="listed_detail__data">${roundTo2(singleListedItem.item_cost)}</div>
                 </div>
             </div>
             <div className="center_item_details">
                 <div className="detail__div_listed_bottom_row">
                     <h5 className="listed_detail__title">Item Weight:</h5>
-                    <div className="listed_detail__data">{singleListedItem.item_weight}</div>
+                    <div className="listed_detail__data">{singleListedItem.item_weight} lbs</div>
                 </div>
             </div>
         </div>
@@ -68,7 +76,7 @@ export const ListedItemDetails = (props) => {
             <div className="center_item_details">
                 <div className="detail__div_listed_bottom_row">
                     <h5 className="listed_detail__title">Listing Fee:</h5>
-                    <div className="listed_detail__data">{singleListedItem.listing_fee}</div>
+                    <div className="listed_detail__data">${singleListedItem.listing_fee}</div>
                 </div>
             </div>
         </div>

@@ -66,7 +66,6 @@ export const ExpenseList = (props) => {
                                         <Button id="sorting__button" color="outline-success" onClick={() => sortDate()}>
                                             <img className="table__image" src={sort} width={25} height={25} />
                                         </Button>
-
                                     </div>
                                 </th>
                                 <th>Supply Type</th>

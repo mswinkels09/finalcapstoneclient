@@ -76,7 +76,7 @@ export const ProfitChart = (props) => {
     })
 
     const monthdata = profitMonth.map(pm => {
-            return pm.profit
+            return pm.profit.toFixed(2)
     })
 
     const monthbardata = {

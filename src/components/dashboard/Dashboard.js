@@ -45,7 +45,7 @@ export const DashboardChart = (props) => {
 
     useEffect(() => {
         const totalProfitObj = profitArray.reduce((a,b) => a+b, 0)
-        setProfitTotal(totalProfitObj.toFixed(2))
+        setProfitTotal(roundTo2(totalProfitObj))
     }, [profitArray])
 
     useEffect(() => {
@@ -54,27 +54,28 @@ export const DashboardChart = (props) => {
     }, [monthExpenses])
 
     useEffect(() => {
-        const totalExpenseObj = expenseArray.reduce((a,b) => a+b, 0).toFixed(2)
-        setExpenseTotal(totalExpenseObj)
+        const totalExpenseObj = expenseArray.reduce((a,b) => a+b, 0)
+        setExpenseTotal(roundTo2(totalExpenseObj))
     }, [expenseArray])
 
     useEffect(() => {
         const totalGrossProfit = profitTotal - expenseTotal
-        setGrossProfit(totalGrossProfit.toFixed(2))
+        setGrossProfit(roundTo2(totalGrossProfit))
     }, [profitTotal, expenseTotal])
         
-        
-    console.log(profitTotal, "profitTotal")
-    console.log(expenseTotal, "expenseTotal")
-    // console.log(grossProfit, "grossProfit")
-
     // const soldDate = sortedSoldItem.sold_date
     // const todaysDate = new Date().toISOString().slice(0,10)
 
     // const numberOfDays = soldDate - todaysDate
 
-
-    // console.log(soldDate)
+    // Function that rounds data to whole number
+    const roundTo2 = (value) => {
+        if(value > 0){
+            const newValue = parseFloat(value.toFixed(2))
+            return newValue
+        }
+        else return 0
+    }
 
     const numberOfListedItems = listedItems.length
     const numberOfSoldItems = soldItems.length
@@ -94,11 +95,11 @@ export const DashboardChart = (props) => {
     })
 
     const profitdata = profitMonth.map(pm => {
-            return pm.profit
+            return roundTo2(pm.profit)
     })
 
     const expensedata = monthExpenses.map(em => {
-        return em.totalexpense
+        return roundTo2(em.totalexpense)
     })
 
     const profitexpensebardata = {
