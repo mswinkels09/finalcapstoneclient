@@ -11,6 +11,14 @@ export const SoldItemDetails = (props) => {
         getSingleSoldItem(soldItemId)
     }, [])
 
+    const roundTo2 = (value) => {
+        if(value > 0){
+            const newValue = parseFloat(value.toFixed(2))
+            return newValue
+        }
+        else return 0
+    }
+
     console.log(singleSoldItem)
 
     return (
@@ -42,19 +50,19 @@ export const SoldItemDetails = (props) => {
             <div className="center_item_details">
                 <div className="detail__div_sold_bottom_row">
                     <h5 className="listed_detail__title">Item Weight</h5>
-                    <div className="listed_detail__data">{singleSoldItem.item_weight}</div>
+                    <div className="listed_detail__data">{singleSoldItem.item_weight} lbs</div>
                 </div>
             </div>
             <div className="center_item_details">
                 <div className="detail__div_sold_bottom_row">
                     <h5 className="listed_detail__title">Total Profit</h5>
-                    <div className="listed_detail__data">${singleSoldItem.profit_per_item}</div>
+                    <div className="listed_detail__data">${roundTo2(singleSoldItem.profit_per_item)}</div>
                 </div>
             </div>
             <div className="center_item_details">
                 <div className="detail__div_sold_bottom_row">
                     <h5 className="listed_detail__title">Item Cost</h5>
-                    <div className="listed_detail__data">${singleSoldItem.item_cost}</div>
+                    <div className="listed_detail__data">${roundTo2(singleSoldItem.item_cost)}</div>
                 </div>
             </div>
         </div>
@@ -62,21 +70,21 @@ export const SoldItemDetails = (props) => {
             <div className="center_item_details">
                 <div className="detail__div_sold_bottom_row">
                     <h5 className="listed_detail__title">Item Paid</h5>
-                    <div className="listed_detail__data">${singleSoldItem.item_paid}</div>
+                    <div className="listed_detail__data">${roundTo2(singleSoldItem.item_paid)}</div>
                     
                 </div>
             </div>
             <div className="center_item_details">
                 <div className="detail__div_sold_bottom_row">
                     <h5 className="listed_detail__title">Shipping Cost</h5>
-                    <div className="listed_detail__data">${singleSoldItem.shipping_cost}</div>
+                    <div className="listed_detail__data">${roundTo2(singleSoldItem.shipping_cost)}</div>
                     
                 </div>
             </div>
             <div className="center_item_details">
                 <div className="detail__div_sold_bottom_row">
                     <h5 className="listed_detail__title">Shipping Paid</h5>
-                    <div className="listed_detail__data">${singleSoldItem.shipping_paid}</div>
+                    <div className="listed_detail__data">${roundTo2(singleSoldItem.shipping_paid)}</div>
                 </div>
             </div>
         </div>
@@ -84,13 +92,13 @@ export const SoldItemDetails = (props) => {
             <div className="center_item_details">
                 <div className="detail__div_sold_bottom_row">
                     <h5 className="listed_detail__title">Listing Fee</h5>
-                    <div className="listed_detail__data">${singleSoldItem.listing_fee}</div>
+                    <div className="listed_detail__data">${roundTo2(singleSoldItem.listing_fee)}</div>
                 </div>
             </div>
             <div className="center_item_details">
                 <div className="detail__div_sold_bottom_row">
                     <h5 className="listed_detail__title">Final Value Fee</h5>
-                    <div className="listed_detail__data">${singleSoldItem.final_value_fee}</div>
+                    <div className="listed_detail__data">${roundTo2(singleSoldItem.final_value_fee)}</div>
                 </div>
             </div>
         </div>

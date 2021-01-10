@@ -51,6 +51,13 @@ export const ListedItemList = (props) => {
         setData(sortedDataCost);
     };
 
+    const roundTo2 = (value) => {
+        if(value > 0){
+            const newValue = parseFloat(value.toFixed(2))
+            return newValue
+        }
+        else return 0
+    }
 
     
     const handleControlledInputChange = (event) => {

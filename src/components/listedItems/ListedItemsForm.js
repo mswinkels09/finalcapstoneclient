@@ -21,11 +21,12 @@ export const ItemForm = props => {
         getWeightTypes()
     }, [])
 
-    // useEffect(() => {
-    //     if(itemPathId){
-    //         getItemInEditMode()
-    //     }
-    // }, [itemPathId])
+
+    useEffect(() => {
+        if(itemPathId){
+            getItemInEditMode()
+        }
+    }, [itemPathId])
 
     useEffect(() => {
         console.log(item)

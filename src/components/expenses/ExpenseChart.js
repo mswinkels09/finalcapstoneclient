@@ -13,12 +13,15 @@ export const ExpenseChart = (props) => {
     }, [])
 
     const supplytypelabels = supplyTypeExpenses.map(ste => {
-        return ste.name
+        if(ste.supply_type_id === 1){
+            return 'Supplies'
+        } else return 'Inventory'
     })
 
     const supplytypedata = supplyTypeExpenses.map(ste => {
-        return ste.expense
+        return ste.totalexpense.toFixed(2)
     })
+    
     const piedata = {
         labels: supplytypelabels,
         datasets: [{
