@@ -67,7 +67,11 @@ I wanted to create this application to be able to not only organize all of the i
 | :---: |
 | <img src="./READMEImages/expenses.png"> |
 
- 
+## ERD and WIREFRAME
+ERD: https://dbdiagram.io/embed/5f33fc37e1246d54aa2d194b<br>
+Wireframe: https://miro.com/app/board/o9J_kluplts=/
+
+
 
 ## Installing locally
 
