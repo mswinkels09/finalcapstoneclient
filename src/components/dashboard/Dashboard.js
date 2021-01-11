@@ -162,7 +162,7 @@ export const DashboardChart = (props) => {
             <div className="dashboard__right">
                 <div className="chart__main_dashboard">
                     <div className="chart__div_dashboard">
-                        <h3 className="chart__title">Profit By Month</h3>
+                        <h3 className="chart__title">Profit and Expenses By Month</h3>
                         <Bar
                             data={profitexpensebardata}
                             height={170}
