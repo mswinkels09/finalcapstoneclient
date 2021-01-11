@@ -1,4 +1,4 @@
-# WhoYou Client
+# PROFIT TRACKER
 
 Check out the app here [https://profittrackingapp.com/login](https://profittrackingapp.com/login)
 
