@@ -1,8 +1,31 @@
 # PROFIT TRACKER
-
-Check out the app here [https://profittrackingapp.com/login](https://profittrackingapp.com/login)
+> Profit/Expense tracking website for the small business owner
 
 The server repo can be found here: [https://github.com/mswinkels09/finalcapstone](https://github.com/mswinkels09/finalcapstone)
+
+## The Idea
+With Covid 19 happening all around us, we wanted a way to make a little extra income while still being as safe as possible. My boyfriend fell back on selling used items on ebay and facebook marketplace. After some success, and some great finds at local thrift stores, this side business has now turned into a passion. </br>
+I wanted to create this application to be able to not only organize all of the items that were listed and sold. But also create a place to easily see how much profit my boyfriend was making and how that compared to the amount of money he spent on inventory and shipping supplies. The goal was to be able to determine if this passion can turn into a full time business.
+
+## Features
+- Easily see your total profit, total expenses, and gross profit from the current year
+- Automatically graphs your total sales and expenses.
+- Seperates Profit and Expenses into categories such as: </br>
+      -<strong> Profit:</strong></br>
+            > listing type (Ebay: Auction, Ebay: Buy It Now,  Facebook Marketplace, Other)</br>
+            > item categories (books, toys, collectibles, clothes, books, etc)</br>
+      - <strong> Expenses:</strong> </br>
+            > supply type (Supplies, Inventory)</br>
+- Full CRUD capability on all items that are currently listed
+- Easy accessible sold button for convenience when item is sold
+- List and Edit features for all sold items 
+- Full CRUD capability on expenses
+- Sort each table by a multitude of factors
+
+## PICS
+ <img src="./READMEImages/Dashboard.png" width="207"> </br> <img src="./READMEImages/Profit.png" width="207"> </br> <img src="./READMEImages/additem.png" width="207"> </br> <img src="./READMEImages/listeditems.png" width="207"> </br>
+ <img src="./READMEImages/solditems.png" width="207"> </br> <img src="./READMEImages/solditemdetail.png" width="207"> </br> <img src="./READMEImages/addexpense.png" width="207"> </br> <img src="./READMEImages/expenses.png" width="207"> 
+ 
 
 ## Installing locally
 
@@ -14,6 +37,8 @@ Dependencies: npm
 1. Run `npm install`
 1. Run `npm start`
 1. Note that the client will now be running locally, but it will make requests to the "production" server. If you want to make requests to a local server, change the path variable in `src/ServerPath.js`
+
+
 
 ## KUDOS
  - I want to thank my entire class in NSS Cohort 42, everyone was so supported and pushed me to become a better software developer.
