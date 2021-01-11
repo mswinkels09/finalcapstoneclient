@@ -22,9 +22,51 @@ I wanted to create this application to be able to not only organize all of the i
 - Full CRUD capability on expenses
 - Sort each table by a multitude of factors
 
-## PICS
- <img src="./READMEImages/Dashboard.png" width="207"> </br> <img src="./READMEImages/Profit.png" width="207"> </br> <img src="./READMEImages/additem.png" width="207"> </br> <img src="./READMEImages/listeditems.png" width="207"> </br>
- <img src="./READMEImages/solditems.png" width="207"> </br> <img src="./READMEImages/solditemdetail.png" width="207"> </br> <img src="./READMEImages/addexpense.png" width="207"> </br> <img src="./READMEImages/expenses.png" width="207"> 
+## Screenshots
+| <strong> Dashboard </strong> |
+| :---: |
+| <img src="./READMEImages/Dashboard.png"> | 
+
+
+| <strong> Profit/Sales </strong> |
+| :---: |
+| <img src="./READMEImages/Profit.png"> |
+
+
+| <strong> Add New Item Form </strong> |
+| :---: |
+| <img src="./READMEImages/additem.png"> |
+
+
+| <strong> Listed Items </strong> |
+| :---: |
+| <img src="./READMEImages/listeditems.png"> |
+
+
+| <strong> Sold Button Click - When an item has been sold </strong> |
+| :---: |
+| <img src="./READMEImages/itemsold.png"> |
+
+
+| <strong> Sold Items </strong> |
+| :---: |
+| <img src="./READMEImages/solditems.png"> |
+
+
+| <strong> Sold Item Detail </strong> |
+| :---: |
+| <img src="./READMEImages/solditemdetail.png"> |
+
+
+| <strong> Add New Expense Form </strong> |
+| :---: |
+| <img src="./READMEImages/addexpense.png"> |
+
+
+| <strong> Expenses </strong> |
+| :---: |
+| <img src="./READMEImages/expenses.png"> |
+
  
 
 ## Installing locally
