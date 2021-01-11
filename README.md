@@ -10,12 +10,6 @@ I wanted to create this application to be able to not only organize all of the i
 ## Features
 - Easily see your total profit, total expenses, and gross profit from the current year
 - Automatically graphs your total sales and expenses.
-- Seperates Profit and Expenses into categories such as: </br>
-      -<strong> Profit:</strong></br>
-            > listing type (Ebay: Auction, Ebay: Buy It Now,  Facebook Marketplace, Other)</br>
-            > item categories (books, toys, collectibles, clothes, books, etc)</br>
-      - <strong> Expenses:</strong> </br>
-            > supply type (Supplies, Inventory)</br>
 - Full CRUD capability on all items that are currently listed
 - Easy accessible sold button for convenience when item is sold
 - List and Edit features for all sold items 
