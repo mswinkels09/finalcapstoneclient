@@ -1,7 +1,11 @@
 # PROFIT TRACKER
 > Profit/Expense tracking website for the small business owner
 
-The server repo can be found here: [https://github.com/mswinkels09/finalcapstone](https://github.com/mswinkels09/finalcapstone)
+The server repo can be found here: [https://github.com/mswinkels09/finalcapstone](https://github.com/mswinkels09/finalcapstone)<br>
+<br>
+View small demonstration go to: https://www.youtube.com/watch?v=ZHMBFhqnTws&feature=youtu.be
+
+
 
 ## The Idea
 With Covid 19 happening all around us, we wanted a way to make a little extra income while still being as safe as possible. My boyfriend fell back on selling used items on ebay and facebook marketplace. After some success, and some great finds at local thrift stores, this side business has now turned into a passion. </br>
