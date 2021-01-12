@@ -7,13 +7,13 @@ import { ListedItemContext } from "../listedItems/ListedItemProvider.js";
 import "./Dashboard.css"
 
 export const DashboardChart = (props) => {
+    //CONTEXTS
     const { profitMonth, getProfitByMonth } = useContext(ProfitContext)
     const { monthExpenses, getExpensesByMonth } = useContext(ExpenseContext)
     const { soldItemsByMonth, getSoldItemsByMonth, soldItems, getSoldItems } = useContext(SoldItemContext)
     const {listedItems, getListedItems} = useContext(ListedItemContext)
 
-    
-    const [sortedSoldItem, setSortedSoldItem] = useState([])
+    //STATE
     const [profitTotal, setProfitTotal] = useState([])
     const [profitArray, setProfitArray] = useState(profitMonth)
 
@@ -22,6 +22,7 @@ export const DashboardChart = (props) => {
 
     const [grossProfit, setGrossProfit] = useState([])
 
+    //GET FUNCTIONS
     useEffect(() => {
         getProfitByMonth()
         getExpensesByMonth()
@@ -29,46 +30,54 @@ export const DashboardChart = (props) => {
         getSoldItems()
         getListedItems()
     }, [])
+    
+    // will use to set most recent sold item
+    // const [sortedSoldItem, setSortedSoldItem] = useState([])
+    // useEffect(() => {
+    //     const sortedSoldItemsArray = soldItems.sort((a,b) => {
+    //         var dateA = new Date(a.sold_date);
+    //         var dateB = new Date(b.sold_date);
+    //         return dateB - dateA;})
+    //         setSortedSoldItem(sortedSoldItemsArray[0])
+    // }, [])
 
-    useEffect(() => {
-        const sortedSoldItemsArray = soldItems.sort((a,b) => {
-            var dateA = new Date(a.sold_date);
-            var dateB = new Date(b.sold_date);
-            return dateB - dateA;})
-            setSortedSoldItem(sortedSoldItemsArray[0])
-    }, [])
-
+    //TOTAL PROFIT
+    //makes a copy of profitMonth array and only adds the profit attribute to the array
+    //sets new array into state
     useEffect(() => {
         const profitarray = profitMonth.slice().map(pa => pa.profit)
             setProfitArray(profitarray)
     }, [profitMonth])
 
+    //adds all profit in that array and sets it to profitTotal
     useEffect(() => {
         const totalProfitObj = profitArray.reduce((a,b) => a+b, 0)
         setProfitTotal(roundTo2(totalProfitObj))
     }, [profitArray])
 
+
+    //TOTAL EXPENSES
+    //makes a copy of monthExpenses array and only adds the totalexpense attribute to the array
+    //sets new array into state
     useEffect(() => {
         const expensearray = monthExpenses.slice().map(pa => pa.totalexpense)
             setExpenseArray(expensearray)
     }, [monthExpenses])
 
+    //adds all totalexpense in that array and sets it to expenseTotal
     useEffect(() => {
         const totalExpenseObj = expenseArray.reduce((a,b) => a+b, 0)
         setExpenseTotal(roundTo2(totalExpenseObj))
     }, [expenseArray])
 
+    //TOTAL GROSS PROFIT
+    //takes the difference between the two totals and sets it to grossProfit
     useEffect(() => {
         const totalGrossProfit = profitTotal - expenseTotal
         setGrossProfit(roundTo2(totalGrossProfit))
     }, [profitTotal, expenseTotal])
-        
-    // const soldDate = sortedSoldItem.sold_date
-    // const todaysDate = new Date().toISOString().slice(0,10)
 
-    // const numberOfDays = soldDate - todaysDate
-
-    // Function that rounds data to whole number
+    //function that changes a value to have a 2 decimal values
     const roundTo2 = (value) => {
         if(value > 0){
             const newValue = parseFloat(value.toFixed(2))
@@ -89,18 +98,23 @@ export const DashboardChart = (props) => {
         return selectedMonthName
     })
 
+    //TOTAL PROFIT AND EXPENSE BAR GRAPH
+    //x axis of the Expense and Profit Chart
     const expenselabels = monthExpenses.map(em => {
         var selectedMonthName = months[em.expensemonth - 1];
         return selectedMonthName
     })
 
+    //y axis data points for total profit
     const profitdata = profitMonth.map(pm => {
             return roundTo2(pm.profit)
     })
 
+    //y axis data points for total expenses
     const expensedata = monthExpenses.map(em => {
         return roundTo2(em.totalexpense)
     })
+
 
     const profitexpensebardata = {
         labels: expenselabels,
@@ -117,12 +131,14 @@ export const DashboardChart = (props) => {
     ],
     }
 
-
+    //TOTAL SOLD ITEMS BAR GRAPH
+    //x axis of the total sold items chart
     const monthlabels = soldItemsByMonth.map(sibm => {
         var selectedMonthName = months[sibm.soldItemMonth - 1];
         return selectedMonthName
     })
 
+    //y axis data points for total number of sold items
     const solditemdata = soldItemsByMonth.map(sibm => {
             return sibm.totalitems
     })

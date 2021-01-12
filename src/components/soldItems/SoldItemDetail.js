@@ -6,11 +6,12 @@ import { Button } from "reactstrap";
 export const SoldItemDetails = (props) => {
     const { singleSoldItem, getSingleSoldItem, editSoldItem } = useContext(SoldItemContext)
 
-    const soldItemId = parseInt(window.location.pathname.split('/')[2])
+    const soldItemId = parseInt(window.location.pathname.split('/')[2]) //http://localhost:3000/solditems/15 => 15
     useEffect(() => {
         getSingleSoldItem(soldItemId)
     }, [])
 
+    //function that changes a value to have a 2 decimal values
     const roundTo2 = (value) => {
         if(value > 0){
             const newValue = parseFloat(value.toFixed(2))
@@ -18,8 +19,6 @@ export const SoldItemDetails = (props) => {
         }
         else return 0
     }
-
-    console.log(singleSoldItem)
 
     return (
     <div className="solditemdetail">

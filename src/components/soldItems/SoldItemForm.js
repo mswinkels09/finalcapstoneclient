@@ -7,7 +7,7 @@ export const SoldItemForm = (props) => {
     const { singleSoldItem, getSingleSoldItem, editSoldItem, soldItems } = useContext(SoldItemContext)
     const [item, setItem] = useState({})
 
-    const soldItemId = parseInt(window.location.pathname.split('/')[2])
+    const soldItemId = parseInt(window.location.pathname.split('/')[2]) //http://localhost:3000/soldItems/15/edit => 15
 
     useEffect(() => {
         getSingleSoldItem(soldItemId)

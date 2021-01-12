@@ -48,6 +48,7 @@ export const ListedItemProvider = (props) => {
             .then(res => res.json())
             .then(setSingleListedItem)
     }
+    
     const deleteListedItem = (itemId) => {
         return fetch(`http://localhost:8000/listeditems/${itemId}`, {
             method: "DELETE",

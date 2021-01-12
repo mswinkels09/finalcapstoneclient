@@ -23,6 +23,8 @@ export const ListedItemList = (props) => {
         setData(listedItems)
     }, [listedItems])
 
+    //SORTING THE DATA ARRAY
+    //makes a copy of the data array and toggles between sorting it high to low - low to high
     const sortDaysListed = () => {
         const sortedDataCost = data.slice().sort((a, b) => {
             if(toggle === false){
@@ -51,6 +53,7 @@ export const ListedItemList = (props) => {
         setData(sortedDataCost);
     };
 
+    //function that changes a value to have a 2 decimal values
     const roundTo2 = (value) => {
         if(value > 0){
             const newValue = parseFloat(value.toFixed(2))
@@ -121,7 +124,7 @@ export const ListedItemList = (props) => {
                                     <td>${li.item_cost.toFixed(2)}</td>
                                     <td>{li.daysListed}</td>
                                     <td>
-                                        <Popup
+                                        <Popup //creates popup that allows user to easily enter in data when an item is sold
                                             trigger={<button className="success table__button" id={li.id}>Sold?</button>}
                                             modal>
                                             {close => (
@@ -165,15 +168,13 @@ export const ListedItemList = (props) => {
                                                     <div className="form__button_listed_sold">
                                                         <Button color="success"
                                                             onClick={evt => {
-                                                                editListedItemToSold(li.id)
-                                                                // findItemId(li.id)
+                                                                editListedItemToSold(li.id) // user is then pushed to sold items page
                                                             }}
                                                             className="btn btn-primary ">
                                                             Save
                                                         </Button>
                                                     </div>
                                                 </div>
-
                                             )}
                                         </Popup>
 

@@ -14,10 +14,11 @@ export const ProfitChart = (props) => {
         getProfitByYear()
     }, [])
 
+
+    //TOTAL PROFIT BY LISTING TYPE PIE CHART
     const listingtypeslabels = profitListingTypes.map(plt => {
         return plt.name
     })
-
     const listingtypesdata = profitListingTypes.map(plt => {
         if (plt.profit != null) {
             return plt.profit.toFixed(2)
@@ -38,10 +39,11 @@ export const ProfitChart = (props) => {
         }]
     }
 
+    
+    //TOTAL PROFIT BY CATEGORIES PIE CHART
     const categorieslabels = profitCategories.map(plt => {
         return plt.name
     })
-
     const categoriesdata = profitCategories.map(plt => {
         if (plt.profit != null) {
             return plt.profit.toFixed(2)
@@ -67,18 +69,16 @@ export const ProfitChart = (props) => {
         }]
     }
 
+    //TOTAL PROFIT BY MONTH OF CURRENT YEAR BAR CHART
     const monthlabels = profitMonth.map(pm => {
         const months = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
-
         var selectedMonthName = months[pm.profitmonth - 1];
         return selectedMonthName
     })
-
     const monthdata = profitMonth.map(pm => {
             return pm.profit.toFixed(2)
     })
-
     const monthbardata = {
         labels: monthlabels,
         datasets: [{
@@ -88,15 +88,13 @@ export const ProfitChart = (props) => {
         }],
     }
 
-
+    //TOTAL PROFIT BY YEAR BAR CHART
     const yearlabels = profitYear.map(py => {
         return py.profityear
     })
-
     const yeardata = profitYear.map(py => {
         return py.profit.toFixed(2)
     })
-
     const yearbardata = {
         labels: yearlabels,
         datasets: [{
