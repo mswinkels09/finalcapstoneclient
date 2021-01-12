@@ -14,12 +14,13 @@ export const ExpenseList = (props) => {
     useEffect(() => {
         getExpenses()
     }, [])
+
     useEffect(() => {
         setData(expenses)
     }, [expenses])
 
-
-
+    //SORTING THE DATA ARRAY
+    //makes a copy of the data array and toggles between sorting it high to low - low to high
     const sortCost = () => {
         const sortedData = data.slice().sort((a, b) => {
             if(toggle === false){

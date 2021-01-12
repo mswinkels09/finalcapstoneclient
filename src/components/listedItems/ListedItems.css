@@ -228,3 +228,24 @@ Table td{
     justify-content: center !important;
     margin-bottom: 7px;
 }
+
+.weight_type__btn{
+    width: 20px !important;
+    text-align: center !important;
+    margin-left: 15px;
+    height: 25px !important;
+    padding: 0 !important;
+}
+
+.weight_type__modal{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.weight_type__div_categories{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.weight_type__div_category{
+    font-size: 13px;
+}

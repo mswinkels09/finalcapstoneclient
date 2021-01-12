@@ -8,10 +8,11 @@ export const ListedItemDetails = (props) => {
 
     
     useEffect(() => {
-        const listedItemId = parseInt(window.location.pathname.split('/')[2])
+        const listedItemId = parseInt(window.location.pathname.split('/')[2]) //http://localhost:3000/listeditems/6 => 6
         getSingleListedItem(listedItemId)
     }, [])
 
+    //function that changes a value to have a 2 decimal values
     const roundTo2 = (value) => {
         if(value > 0){
             const newValue = parseFloat(value.toFixed(2))

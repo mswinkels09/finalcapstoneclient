@@ -8,7 +8,8 @@ export const ExpenseForm = props => {
     const{addExpense, expenses, editExpense} = useContext(ExpenseContext)
     const{supplyTypes, getSupplyTypes} = useContext(TypesContext)
 
-    const expensePathId = parseInt(window.location.pathname.split('/')[2])
+    //used to check if user is in edit mode or adding a new expense
+    const expensePathId = parseInt(window.location.pathname.split('/')[2]) //http://localhost:3000/expenses/7/edit => 7
 
     const [expense, setExpense] = useState({})
 
@@ -35,7 +36,7 @@ export const ExpenseForm = props => {
                 supply_type_id: parseInt(selectedExpense.supply_type.id),
                 date_purchased: selectedExpense.date_purchased,
                 cost: selectedExpense.cost,
-                image: ""
+                image: "" // stretch goal
             }
             setExpense(selectedExpenseUnnested)
     }
@@ -47,7 +48,7 @@ export const ExpenseForm = props => {
                 supply_type_id: parseInt(expense.supply_type_id),
                 date_purchased: expense.date_purchased,
                 cost: expense.cost,
-                image: ""
+                image: "" // stretch goal
             })
 
                 .then(() => props.history.push("/expenses"))
@@ -56,7 +57,7 @@ export const ExpenseForm = props => {
                 supply_type_id: parseInt(expense.supply_type_id),
                 date_purchased: expense.date_purchased,
                 cost: expense.cost,
-                image: ""
+                image: "" //stretch goal
             })
                 .then(() => props.history.push("/expenses"))
         }

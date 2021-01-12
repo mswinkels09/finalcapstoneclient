@@ -7,11 +7,9 @@ export const ExpenseDetails = (props) => {
     const { singleExpense, getSingleExpense, deleteExpense } = useContext(ExpenseContext)
 
     useEffect(() => {
-        const expenseId = parseInt(window.location.pathname.split('/')[2])
+        const expenseId = parseInt(window.location.pathname.split('/')[2]) //http://localhost:3000/expenses/7 => 7
         getSingleExpense(expenseId)
     }, {})
-
-    console.log(singleExpense)
 
     const delete_prompt = (id) => {
         var retVal = window.confirm("This action will permanently delete the expense. Are you sure?");
