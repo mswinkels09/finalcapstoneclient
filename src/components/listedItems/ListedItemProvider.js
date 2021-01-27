@@ -4,7 +4,7 @@ export const ListedItemContext = React.createContext()
 
 export const ListedItemProvider = (props) => {
     const [ listedItems, setListedItems ] = useState([])
-    const [singleListedItem, setSingleListedItem] = useState({category: {name: ""}, listing_type: {name: ""}, weight_type: {type: ""}})
+    const [singleListedItem, setSingleListedItem] = useState({category: {}, listing_type: {}, weight_type: {}})
 
     const getListedItems = () => {
         return fetch("http://localhost:8000/listeditems", {

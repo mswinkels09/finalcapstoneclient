@@ -4,13 +4,14 @@ import "./ListedItems.css"
 import { Button } from "reactstrap";
 
 export const ListedItemDetails = (props) => {
+    // debugger
     const { singleListedItem, getSingleListedItem, deleteListedItem } = useContext(ListedItemContext)
 
-    
+    const listedItemId = parseInt(window.location.pathname.split('/')[2]) //http://localhost:3000/listeditems/6 => 6
+
     useEffect(() => {
-        const listedItemId = parseInt(window.location.pathname.split('/')[2]) //http://localhost:3000/listeditems/6 => 6
         getSingleListedItem(listedItemId)
-    }, [])
+    }, [listedItemId])
 
     //function that changes a value to have a 2 decimal values
     const roundTo2 = (value) => {
@@ -25,12 +26,14 @@ export const ListedItemDetails = (props) => {
         var retVal = window.confirm("This action will permanently delete the item. Are you sure?");
         if( retVal == true ) {
             deleteListedItem(id)
-            props.history.push("/expenses")
+            .then(props.history.push("/listeditems"))
+            .then(window.location.reload(false))
             return true;
         } else {
             return false;
         }
     }
+    console.log(singleListedItem)
 
     return (
     <div className="listeditemdetail">
@@ -42,14 +45,14 @@ export const ListedItemDetails = (props) => {
         <div className="row__details top_row__details">
             <div className="center_item_details">
                 <div className="detail__div_listed_top_row">
-                    <h4 className="listed_detail__title top_row">Listing Type:</h4>
-                    <div className="listed_detail__data">{singleListedItem.listing_type.name}</div>
+                    <h4 className="listed_detail__title top_row">Category:</h4>
+                    <div className="listed_detail__data">{singleListedItem.category.name}</div>
                 </div>
             </div>
             <div className="center_item_details">
                 <div className="detail__div_listed_top_row">
-                    <h4 className="listed_detail__title top_row">Category:</h4>
-                    <div className="listed_detail__data">{singleListedItem.category.name}</div>
+                    <h4 className="listed_detail__title top_row">Listing Type:</h4>
+                    <div className="listed_detail__data">{singleListedItem.listing_type.name}</div>
                 </div>
             </div>
         </div>

@@ -29,10 +29,6 @@ export const ItemForm = props => {
         }
     }, [itemPathId])
     
-    useEffect(() => {
-        console.log(item)
-        console.log(item.date_listed)
-    }, [item])
 
     //WEIGHT TO ITEM COST CALCULATIONS
     //matches the weight_type_id to the currents item weight_type_id    
@@ -202,7 +198,7 @@ export const ItemForm = props => {
                             </FormGroup>
                         </div>
                         <FormGroup className="form__detail_listed">
-                            <Input type="textarea" name="notes" id="notes" placeholder="Item Notes"
+                            <Input type="textarea" name="notes" id="notes" placeholder="Item Notes" defaultValue=""
                                 value={item.notes}
                                 onChange={handleControlledInputChange} />
                         </FormGroup>
