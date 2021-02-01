@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./Auth.css"
 import logo from "../images/logo.png"
+import settings from "../Settings.js"
 
 
 export const Login = props => {
@@ -12,7 +13,7 @@ export const Login = props => {
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch("http://127.0.0.1:8000/login", {
+        return fetch(`${settings.remoteUrl}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
