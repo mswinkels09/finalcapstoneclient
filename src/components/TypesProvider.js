@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import settings from "Settings.js"
+import settings from "./Settings.js"
 
 export const TypesContext = React.createContext()
 
