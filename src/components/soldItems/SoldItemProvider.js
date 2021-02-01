@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import settings from "../Settings.js"
 
 export const SoldItemContext = React.createContext()
 
@@ -8,7 +9,7 @@ export const SoldItemProvider = (props) => {
     const [singleSoldItem, setSingleSoldItem] = useState({category: {}, listing_type: {}})
 
     const getSoldItems = () => {
-        return fetch("http://localhost:8000/solditems", {
+        return fetch(`${settings.remoteUrl}/solditems`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -18,7 +19,7 @@ export const SoldItemProvider = (props) => {
     }
 
     const getSoldItemsByMonth = () => {
-        return fetch("http://localhost:8000/solditemsbymonth", {
+        return fetch(`${settings.remoteUrl}/solditemsbymonth`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -28,7 +29,7 @@ export const SoldItemProvider = (props) => {
     }
 
     const getSingleSoldItem = (item) => {
-        return fetch(`http://localhost:8000/solditems/${item}`, {
+        return fetch(`${settings.remoteUrl}/solditems/${item}`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }})
@@ -37,7 +38,7 @@ export const SoldItemProvider = (props) => {
     }
 
     const editSoldItem = item => {
-        return fetch(`http://localhost:8000/solditems/${item.id}`, {
+        return fetch(`${settings.remoteUrl}/solditems/${item.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

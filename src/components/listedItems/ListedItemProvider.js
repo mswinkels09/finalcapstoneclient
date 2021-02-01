@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import settings from "../Settings.js"
 
 export const ListedItemContext = React.createContext()
 
@@ -7,7 +8,7 @@ export const ListedItemProvider = (props) => {
     const [singleListedItem, setSingleListedItem] = useState({category: {}, listing_type: {}, weight_type: {}})
 
     const getListedItems = () => {
-        return fetch("http://localhost:8000/listeditems", {
+        return fetch(`${settings.remoteUrl}/listeditems`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -17,7 +18,7 @@ export const ListedItemProvider = (props) => {
     }
 
     const addItem = item => {
-        return fetch("http://localhost:8000/listeditems", {
+        return fetch(`${settings.remoteUrl}/listeditems`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -29,7 +30,7 @@ export const ListedItemProvider = (props) => {
     }
 
     const editListedItem = item => {
-        return fetch(`http://localhost:8000/listeditems/${item.id}`, {
+        return fetch(`${settings.remoteUrl}/listeditems/${item.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -41,7 +42,7 @@ export const ListedItemProvider = (props) => {
     }
 
     const getSingleListedItem = (item) => {
-        return fetch(`http://localhost:8000/listeditems/${item}`, {
+        return fetch(`${settings.remoteUrl}/listeditems/${item}`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }})
@@ -50,7 +51,7 @@ export const ListedItemProvider = (props) => {
     }
     
     const deleteListedItem = (itemId) => {
-        return fetch(`http://localhost:8000/listeditems/${itemId}`, {
+        return fetch(`${settings.remoteUrl}/listeditems/${itemId}`, {
             method: "DELETE",
             headers:{
                 "Content-Type": "application/json",

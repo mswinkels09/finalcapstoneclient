@@ -1,0 +1,1 @@
+export default {remoteUrl: "http://mswinkels.pythonanywhere.com"} 

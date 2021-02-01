@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import settings from "../Settings.js"
 
 export const ProfitContext = React.createContext()
 
@@ -10,7 +11,7 @@ export const ProfitProvider = (props) => {
 
 
     const getProfitByListingType = () => {
-        return fetch("http://localhost:8000/profitbylistingtype", {
+        return fetch(`${settings.remoteUrl}/profitbylistingtype`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -20,7 +21,7 @@ export const ProfitProvider = (props) => {
     }
 
     const getProfitByCategories = () => {
-        return fetch("http://localhost:8000/profitbycategories", {
+        return fetch(`${settings.remoteUrl}/profitbycategories`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -30,7 +31,7 @@ export const ProfitProvider = (props) => {
     }
 
     const getProfitByMonth = () => {
-        return fetch("http://localhost:8000/profitbymonth", {
+        return fetch(`${settings.remoteUrl}/profitbymonth`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -40,7 +41,7 @@ export const ProfitProvider = (props) => {
     }
 
     const getProfitByYear = () => {
-        return fetch("http://localhost:8000/profitbyyear", {
+        return fetch(`${settings.remoteUrl}/profitbyyear`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }

@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import settings from "../Settings.js"
 
 export const ExpenseContext = React.createContext()
 
@@ -9,7 +10,7 @@ export const ExpenseProvider = (props) => {
     const [singleExpense, setExpense] = useState({supply_type: {}})
 
     const getExpenses = () => {
-        return fetch("http://localhost:8000/expenses", {
+        return fetch(`${settings.remoteUrl}/expenses`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -19,7 +20,7 @@ export const ExpenseProvider = (props) => {
     }
 
     const getExpensesBySupplyType = () => {
-        return fetch("http://localhost:8000/expensesbysupplytype", {
+        return fetch(`${settings.remoteUrl}/expensesbysupplytype`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -29,7 +30,7 @@ export const ExpenseProvider = (props) => {
     }
 
     const getExpensesByMonth = () => {
-        return fetch("http://localhost:8000/expensesbymonth", {
+        return fetch(`${settings.remoteUrl}/expensesbymonth`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -39,7 +40,7 @@ export const ExpenseProvider = (props) => {
     }
 
     const addExpense = expense => {
-        return fetch("http://localhost:8000/expenses", {
+        return fetch(`${settings.remoteUrl}/expenses`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export const ExpenseProvider = (props) => {
             .then(getExpenses)
     }
     const getSingleExpense = (expense) => {
-        return fetch(`http://localhost:8000/expenses/${expense}`, {
+        return fetch(`${settings.remoteUrl}/expenses/${expense}`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }})
@@ -59,7 +60,7 @@ export const ExpenseProvider = (props) => {
     }
 
     const editExpense = expense => {
-        return fetch(`http://localhost:8000/expenses/${expense.id}`, {
+        return fetch(`${settings.remoteUrl}/expenses/${expense.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -71,7 +72,7 @@ export const ExpenseProvider = (props) => {
     }
 
     const deleteExpense = expenseId => {
-        return fetch(`http://localhost:8000/expenses/${expenseId}`, {
+        return fetch(`${settings.remoteUrl}/expenses/${expenseId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

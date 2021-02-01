@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import settings from "../Settings.js"
 
 export const TypesContext = React.createContext()
 
@@ -9,7 +10,7 @@ export const TypesProvider = (props) => {
     const [ weightTypes, setWeightTypes ] = useState([])
 
     const getCategories = () => {
-        return fetch("http://localhost:8000/categories", {
+        return fetch(`${settings.remoteUrl}/categories`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -19,7 +20,7 @@ export const TypesProvider = (props) => {
     }
 
     const getSupplyTypes = () => {
-        return fetch("http://localhost:8000/supply_types", {
+        return fetch(`${settings.remoteUrl}/supply_types`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -29,7 +30,7 @@ export const TypesProvider = (props) => {
     }
     
     const getListingTypes = () => {
-        return fetch("http://localhost:8000/listing_types", {
+        return fetch(`${settings.remoteUrl}/listing_types`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
@@ -39,7 +40,7 @@ export const TypesProvider = (props) => {
     }
 
     const getWeightTypes = () => {
-        return fetch("http://localhost:8000/weight_types", {
+        return fetch(`${settings.remoteUrl}/weight_types`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("user_token")}`
             }
