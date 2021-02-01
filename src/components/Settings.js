@@ -1,1 +1,1 @@
-export default {remoteUrl: "http://mswinkels.pythonanywhere.com"} 
+export default {remoteUrl: "https://mswinkels.pythonanywhere.com"} 
