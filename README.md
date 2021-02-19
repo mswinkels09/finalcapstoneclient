@@ -7,7 +7,8 @@ View small demonstration go to: https://www.youtube.com/watch?v=ZHMBFhqnTws&feat
 <br>
 ### Test It Out!!! -> https://profittrackerapp.herokuapp.com/
  dummyemail: test@test.com
- dummypassowrd: test
+ <br>
+ dummypassword: test
  <br>
  
 ## The Idea
