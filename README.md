@@ -4,9 +4,12 @@
 The server repo can be found here: [https://github.com/mswinkels09/finalcapstone](https://github.com/mswinkels09/finalcapstone)<br>
 <br>
 View small demonstration go to: https://www.youtube.com/watch?v=ZHMBFhqnTws&feature=youtu.be
-
-
-
+<br>
+### Test It Out!!! -> https://profittrackerapp.herokuapp.com/
+ dummyemail: test@test.com
+ dummypassowrd: test
+ <br>
+ 
 ## The Idea
 With Covid 19 happening all around us, we wanted a way to make a little extra income while still being as safe as possible. My boyfriend fell back on selling used items on ebay and facebook marketplace. After some success, and some great finds at local thrift stores, this side business has now turned into a passion. </br>
 I wanted to create this application to be able to not only organize all of the items that were listed and sold. But also create a place to easily see how much profit my boyfriend was making and how that compared to the amount of money he spent on inventory and shipping supplies. The goal was to be able to determine if this passion can turn into a full time business.
